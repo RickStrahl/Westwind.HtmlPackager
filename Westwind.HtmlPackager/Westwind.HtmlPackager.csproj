@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageTags>Westwind Html Package</PackageTags>
-    <PackageIconUrl>https://github.com/RickStrahl/Westwind.HtmlPackager/HtmlPackagerIcon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</PackageIconUrl>
     <Copyright>(c) West Wind Technologies, 2018</Copyright>    
   </PropertyGroup>
 

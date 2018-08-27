@@ -1,6 +1,13 @@
 # Westwind.HtmlPackager
 
-A small C# utility class used to package HTML pages into a self contained package. There are two modes:
+A small C# utility class used to package HTML pages into a self contained package. 
+
+The packager works with:
+
+* Web Urls
+* Local HTML Files
+
+There are two packaging modes:
 
 * **Package to a single file**  
 All related resources are downloaded and embedded as into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded.
@@ -8,11 +15,25 @@ All related resources are downloaded and embedded as into the HTML content. CSS 
 * **HTML file plus loose Resource Files**  
 Produces a folder with an HTML file and all CSS, Script, images, fonts as loose file.
 
-The class is small and self contained and can be easily added to another project. Depends on `HtmlAgilityPack`.
+The library is small and self contained and can be easily added to another project with two source files, or you can use **NuGet** to include it. Depends on [HtmlAgilityPack](http://html-agility-pack.net/) for HTML parsing.
 
-### Usage
+### Installation via NuGet
+You can install this library from NuGet:
 
-#### Capture URL to embedded HTML as String
+```
+install-package Westwind.HtmlPackager
+```
+
+or 
+
+```
+c:> dotnet add package Westwind.HtmlPackager
+```
+
+## Usage
+The following are various usage examples for packaging HTML from files or Web URLs into the two package formats.
+
+### Capture HTML File to embedded HTML as String
 The following captures the HTML to a single file string from a local file on disk:
 
 ```cs
@@ -27,7 +48,7 @@ File.WriteAllText(outputFile, packaged);
 Console.WriteLine(packaged);
 ```
 
-#### Capture File URL to embedded HTML as File
+### Capture HTML File to embedded HTML as File
 
 ```cs
 var inputFile = Path.Combine(Path.GetTempPath(), "_MarkdownMonster_Preview.html");
@@ -52,7 +73,7 @@ File.WriteAllText(outputFile, packaged);
 ShellUtils.GoUrl(outputFile);
 ```
 
-#### Capture File Url to HTML File + Loose Resources
+#### Capture File to HTML File + Loose Resources
 
 ```cs
 var packager = new HtmlPackager();
@@ -74,3 +95,11 @@ bool result = packager.PackageHtmlToFolder("http://west-wind.com/", outputFile, 
 
 ShellUtils.GoUrl(outputFile);
 ```
+
+## License
+The Westwind.HtmlPackager library is licensed under the [MIT License](https://opensource.org/licenses/MIT) and there's no charge to use, integrate or modify the code for this project. You are free to use it in personal, commercial, government and any other type of application.
+
+All source code is copyright West Wind Technologies, regardless of changes made to them. Any source code modifications must leave the original copyright code headers intact.
+
+## Warranty Disclaimer: No Warranty!
+IN NO EVENT SHALL THE AUTHOR, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THIS PROGRAM AND DOCUMENTATION, BE LIABLE FOR ANY COMMERCIAL, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM INCLUDING, BUT NOT LIMITED TO, LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR LOSSES SUSTAINED BY THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS, EVEN IF YOU OR OTHER PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
