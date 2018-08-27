@@ -1,22 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.01</Version>
-    <AssemblyVersion>0.01</AssemblyVersion>
-    <FileVersion>0.01</FileVersion>    
+    <Version>0.1</Version>
+    <AssemblyVersion>0.1</AssemblyVersion>
+    <FileVersion>0.1</FileVersion>    
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technologies</Company>
     <Product>West Wind Web Toolkit</Product>
     <Title>Westwind Web AspNet Core Support Library</Title>
     <Description>A small C# utility class used to package HTML pages into a self contained package. Package options can package to a single large file with all embedded resources, or a self-contained folder location with external dependencies.</Description>
-    <Copyright>(c) West Wind Technologies, 2018</Copyright>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#License</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageTags>Westwind Html Package</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</PackageIconUrl>
-    <Copyright>(c) West Wind Technologies, 2018</Copyright>    
+    <Copyright>© Rick Strahl - West Wind Technologies, 2018</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes />    
   </PropertyGroup>
 
   <ItemGroup>

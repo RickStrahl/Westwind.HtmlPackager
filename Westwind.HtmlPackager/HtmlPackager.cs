@@ -1,28 +1,87 @@
-﻿using System;
+﻿#region License
+/*
+ **************************************************************
+ *  Author: Rick Strahl 
+ *          © West Wind Technologies, 
+ *          http://www.west-wind.com/
+ * 
+ * Created: 08/28/2018
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ **************************************************************  
+*/
+#endregion
+
+
+using System;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Westwind.HtmlPackager.Utilities;
 
+
 namespace Westwind.HtmlPackager
 {
 
     /// <summary>
-    /// Class that packages up an HTML file into a single file by
-    /// pulling scripts, css and image resources inline.
+    /// A utility class that can package HTML and all of its dependencies
+    /// into either a single file with embedded text and binary resources,
+    /// or into a self contained folder that holds the HTML plus its
+    /// external dependencies. 
     /// </summary>
     public class HtmlPackager
     {
-
-        int ctr = 0;
-        
+        /// <summary>
+        /// A Url or File to load for packaging
+        /// </summary>
         public string UrlOrFile { get; set; }
 
+
+        /// <summary>
+        /// The output path where the result HTML file is to be created.
+        /// If creating external depedendencies, the dependencies are dumped
+        /// into the same folder
+        /// </summary>
+        public string OutputPath { get; set; }
+
+
+
+        /// <summary>
+        /// Internal flag to determine if files are 
+        /// </summary>
         bool CreateExternalFiles { get; set; }
 
-        public string OutputPath { get; set; }
+        /// <summary>
+        /// Internally tracked base URI for the file or URL so
+        /// resources can be discovered and found.
+        /// </summary>
         Uri BaseUri { get; set; }
+
+
+        /// <summary>
+        /// Internal naming counter
+        /// </summary>
+        int ctr = 0;
 
         #region Main API
 
