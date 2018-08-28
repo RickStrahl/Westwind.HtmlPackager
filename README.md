@@ -1,6 +1,6 @@
 # Westwind.HtmlPackager
 
-A small C# utility class used to package HTML pages into a self contained package. 
+A small C# utility class used to package HTML pages into a local, self contained HTML file, or a file plus all of it's associated dependencies.
 
 The packager works with:
 
@@ -15,10 +15,15 @@ All related resources are downloaded and embedded as into the HTML content. CSS 
 * **HTML file plus loose Resource Files**  
 Produces a folder with an HTML file and all CSS, Script, images, fonts as loose file.
 
-The library is small and self contained and can be easily added to another project with two source files, or you can use **NuGet** to include it. Depends on [HtmlAgilityPack](http://html-agility-pack.net/) for HTML parsing.
+The library is small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager/) to include it. Depends on [HtmlAgilityPack](http://html-agility-pack.net/) for HTML parsing.
+
+Supported Targets:
+
+* .NET 4.5
+* .NET Standard 2.0
 
 ### Installation via NuGet
-You can install this library from NuGet:
+You can install this library from [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager/):
 
 ```
 install-package Westwind.HtmlPackager
@@ -27,7 +32,7 @@ install-package Westwind.HtmlPackager
 or 
 
 ```
-c:> dotnet add package Westwind.HtmlPackager
+dotnet add package Westwind.HtmlPackager
 ```
 
 ## Usage
@@ -97,7 +102,7 @@ ShellUtils.GoUrl(outputFile);
 ```
 
 ## License
-The Westwind.HtmlPackager library is licensed under the [MIT License](https://opensource.org/licenses/MIT) and there's no charge to use, integrate or modify the code for this project. You are free to use it in personal, commercial, government and any other type of application.
+The Westwind.HtmlPackager library is license  under the [MIT License](https://opensource.org/licenses/MIT) and there's no charge to use, integrate or modify the code for this project. You are free to use it in personal, commercial, government and any other type of application.
 
 All source code is copyright West Wind Technologies, regardless of changes made to them. Any source code modifications must leave the original copyright code headers intact.
 
