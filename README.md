@@ -28,13 +28,13 @@ Supported Targets:
 * .NET Standard 2.0
 
 ## Standalone HtmlPackager Application (Windows)
-The HTML Packager is available as a self contained Windows Console application in HtmlPackager.exe which you can download and copy as needed. You can also use the Chocolatey package:
+The HTML Packager is available as a self contained Windows Console application in HtmlPackager.exe which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe). You can also use the Chocolatey package:
 
 ```
 choco install HtmlPackager
 ```
 
-The 
+The packager runs as a single file EXE (packaged with ILMerge) with a few command line options.
 
 ```txt
 Syntax:
