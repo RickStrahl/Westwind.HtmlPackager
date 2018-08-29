@@ -54,7 +54,7 @@ namespace Westwind.HtmlPackager
         /// <summary>
         /// A Url or File to load for packaging
         /// </summary>
-        public string UrlOrFile { get; set; }
+        public string SourceUrlOrFile { get; set; }
 
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Westwind.HtmlPackager
             if (string.IsNullOrEmpty(basePath))
                 basePath = Path.GetTempPath();
 
-            UrlOrFile = urlOrFile;
+            SourceUrlOrFile = urlOrFile;
 
             CreateExternalFiles = createExternalFiles;
 
@@ -120,10 +120,19 @@ namespace Westwind.HtmlPackager
             if (urlOrFile.StartsWith("http", StringComparison.InvariantCultureIgnoreCase) && urlOrFile.Contains("://"))
             {
 
-                BaseUri = new Uri(UrlOrFile);
+                BaseUri = new Uri(SourceUrlOrFile);
 
-                var web = new HtmlWeb();
-                doc = web.Load(urlOrFile);
+                HtmlWeb web = null;
+                try
+                {
+                    web = new HtmlWeb();
+                    doc = web.Load(urlOrFile);
+                }
+                catch (Exception ex)
+                {
+                    SetError($"Error loading Url: urlOrFile: {ex.Message}");
+                    return null;
+                }
 
                 var docBase = doc.DocumentNode.SelectSingleNode("//base");
                 if (docBase != null)
@@ -141,8 +150,17 @@ namespace Westwind.HtmlPackager
             }
             else
             {
-                doc = new HtmlDocument();
-                doc.Load(urlOrFile);
+
+                try
+                {
+                    doc = new HtmlDocument();
+                    doc.Load(urlOrFile);
+                }
+                catch (Exception ex)
+                {
+                    SetError($"Error loading HTML file: {ex.Message}");
+                    return null;
+                }
 
                 var docBase = doc.DocumentNode.SelectSingleNode("//base");
                 if (docBase != null)
@@ -212,10 +230,15 @@ namespace Westwind.HtmlPackager
 
             try
             {
+                var dir = Path.GetDirectoryName(outputFile);
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
                 File.WriteAllText(outputFile, html);
             }
-            catch
-            {                
+            catch(Exception ex)
+            {
+                SetError($"Error writing out HTML file: {ex.Message}");
                 return false;
             }
 
@@ -248,11 +271,9 @@ namespace Westwind.HtmlPackager
                     File.Delete(file);
             }
             
-
-            if (!Directory.Exists(OutputPath))
-            {
+            if (!Directory.Exists(OutputPath))            
                 Directory.CreateDirectory(OutputPath);                
-            }
+            
             
             return PackageHtmlToFile(urlOrFile, outputFile, basePath, true);
         }
@@ -589,6 +610,39 @@ namespace Westwind.HtmlPackager
 
             return html;
         }
+        #endregion
+
+        #region Error Handler
+
+        public string ErrorMessage { get; set; }
+
+        protected void SetError()
+        {
+            this.SetError("CLEAR");
+        }
+
+        protected void SetError(string message)
+        {
+            if (message == null || message == "CLEAR")
+            {
+                this.ErrorMessage = string.Empty;
+                return;
+            }
+            this.ErrorMessage += message;
+        }
+
+        protected void SetError(Exception ex, bool checkInner = false)
+        {
+            if (ex == null)
+                this.ErrorMessage = string.Empty;
+
+            Exception e = ex;
+            if (checkInner)
+                e = e.GetBaseException();
+
+            ErrorMessage = e.Message;
+        }
+        #endregion
     }
-    #endregion
+
 }

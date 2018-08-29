@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westwind.HtmlPackager", "Westwind.HtmlPackager\Westwind.HtmlPackager.csproj", "{7AB3AD81-A9AB-4F73-A8CE-7296762E00B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westwind.HtmlPackager.Test", "Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test.csproj", "{625D256C-94D1-4854-9E45-DA8BED5E8FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westwind.HtmlPackager.Test", "Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test.csproj", "{625D256C-94D1-4854-9E45-DA8BED5E8FB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPackager", "HtmlPackager\HtmlPackager.csproj", "{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{625D256C-94D1-4854-9E45-DA8BED5E8FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{625D256C-94D1-4854-9E45-DA8BED5E8FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{625D256C-94D1-4854-9E45-DA8BED5E8FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
