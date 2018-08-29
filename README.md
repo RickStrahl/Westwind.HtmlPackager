@@ -5,7 +5,7 @@
 
 A small utility library that can be used to package HTML pages into a local, self-contained HTML file, or a file plus all of it's associated file dependencies copied into a single folder
 
-This library is provided as a small executable and .NET Library and distributed via Chocolatey and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
+This library is provided as a small executable and .NET Library and distributed via [Chocolatey](https://chocolatey.org/packages/HtmlPackager) and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
 
 The packager works with:
 
