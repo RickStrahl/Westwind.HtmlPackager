@@ -5,7 +5,7 @@
 
 A small utility library that can be used to package HTML pages into a local, self-contained HTML file, or a file plus all of it's associated file dependencies copied into a single folder
 
-This library is provided as a small executable and .NET Library and distributed via [Chocolatey](https://chocolatey.org/packages/HtmlPackager) and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
+This library is provided as a small .NET 4.5 executable and .NET Library and distributed via [Chocolatey](https://chocolatey.org/packages/HtmlPackager) and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
 
 The packager works with:
 
@@ -20,11 +20,11 @@ All related resources are downloaded and embedded as into the HTML content. CSS 
 * **HTML file plus loose Resource Files**  
 Produces a folder with an HTML file and all CSS, Script, images, fonts as loose file.
 
-The library is small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include it. Depends on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
+The library is small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. Depends on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
 
-Supported Targets:
+Supported .NET Targets:
 
-* .NET 4.5
+* .NET 4.5+
 * .NET Standard 2.0
 
 ## Standalone HtmlPackager Application (Windows)
