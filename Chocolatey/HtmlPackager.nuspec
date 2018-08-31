@@ -2,23 +2,29 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>HtmlPackager</id>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
         <title>West Wind HTML Packager</title>
         <authors>Rick Strahl,West Wind Technologies</authors>
         <owners>West Wind Technologies</owners>
         <licenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#license</licenseUrl>
-        <projectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</projectUrl>        
+        <projectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</projectUrl>
+        <projectSourceUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</projectSourceUrl>
+        <docsUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</docsUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>
-		DeleteFiles is a small Windows command line utility that deletes files and folders recursively down folder hierarchies using standard command line wildcard path syntax. It supports deeply nested folder structures that exceed Windows' MAX_PATH limit (like deep NPM hierarchies). You can also optionally specify a time cut off for files to be deleted with day and second filters - for example you can delete files with a file spec that are 7 days old. 
-		
-		Files can be hard deleted, sent to the recycle bin or you can run a preview to see what would be deleted.
+		HtmlPackager is a small utility that allows you to package Web HTML content to local content
+    that can be saved and viewed offline. The packager can create:
+    
+    * A self-contained, very large HTML file with all resources embedded inline
+    * An HTML file with all resources copied local into the same folder as the document
+
+    
 		</description>
 		<iconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</iconUrl>
         <summary>A recursive file and folder deletion command line utility, that supports deeply nested folder structures and timed deletions.</summary>
         <releaseNotes></releaseNotes>
         <copyright>West Wind Technologies, 2018</copyright>
-        <tags>HTML,Packing,Command-Line</tags>
+        <tags>html packing console</tags>
     </metadata>
     <files>
         <file src="tools\chocolateyInstall.ps1" target="tools\chocolateyInstall.ps1" />

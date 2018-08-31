@@ -12,3 +12,5 @@ choco pack
 choco uninstall "HtmlPackager" -f
 
 choco install "HtmlPackager" -fd  -y -s ".\"
+
+#choco push

@@ -1,9 +1,13 @@
 # Westwind.HtmlPackager
 
-
 <img src="HtmlPackagerIcon.png" align="left" />
 
-A small utility library that can be used to package HTML pages into a local, self-contained HTML file, or a file plus all of it's associated file dependencies copied into a single folder
+HtmlPackager is a tiny utility standalone Windows Exe or .NET component that allows you to package Web HTML content as local content that can be saved and viewed offline. 
+
+The packager can create:
+
+* **A single, large Self-Contained HTML File**
+* **An HTML file with external, local Assets**
 
 This library is provided as a small .NET 4.5 executable and .NET Library and distributed via [Chocolatey](https://chocolatey.org/packages/HtmlPackager) and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
 
@@ -15,12 +19,14 @@ The packager works with:
 There are two packaging modes:
 
 * **Package to a single file**  
-All related resources are downloaded and embedded as into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded.
+All related resources are downloaded and embedded into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded.
 
 * **HTML file plus loose Resource Files**  
 Produces a folder with an HTML file and all CSS, Script, images, fonts as loose file.
 
-The library is small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. Depends on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
+The .NET EXE is a single file EXE that requires .NET 4.5+.
+
+The .NET library allows embedding of the packaging functionality into your own applicaitons. It is very small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. The library has an external dependency on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
 
 Supported .NET Targets:
 
