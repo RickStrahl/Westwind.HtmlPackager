@@ -1,14 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.1.2</Version>
-    <AssemblyVersion>0.1.2</AssemblyVersion>
+    <Version>0.1.3</Version>
+    <AssemblyVersion>0.1.3</AssemblyVersion>
     <FileVersion>0.1.2</FileVersion>    
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technologies</Company>
     <Product>West Wind Web Toolkit</Product>
     <Title>Westwind Web AspNet Core Support Library</Title>
-    <Description>A small C# utility class used to package HTML pages into a self contained package. Package options can package to a single large file with all embedded resources, or a self-contained folder location with external dependencies.</Description>
+    <Description>
+      HtmlPackager is a small utility class used to package HTML content into a self contained HTML document
+      both as a single file, or a folder with all dependencies copied to local. It provides a programmatic way
+      to perform a similar task to Browser **Save As...** operations that capture page output to disk.
+
+      The packager can create:
+
+      * A single, self-contained and very large HTML file with all resources embedded inline
+      * An HTML file with all resources copied local into the same folder as the document
+
+      This library provides both a .NET Library and a Windows Console application EXE in a separate 
+      Chocolatey Package.    
+    </Description>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#License</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</RepositoryUrl>

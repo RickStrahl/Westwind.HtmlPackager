@@ -2,23 +2,27 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>HtmlPackager</id>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
         <title>West Wind HTML Packager</title>
         <authors>Rick Strahl,West Wind Technologies</authors>
         <owners>West Wind Technologies</owners>
         <licenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#license</licenseUrl>
         <projectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</projectUrl>
         <projectSourceUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</projectSourceUrl>
-        <docsUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</docsUrl>
+        <docsUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#standalone-htmlpackager-application-windows</docsUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>
-		HtmlPackager is a small utility that allows you to package Web HTML content to local content
-    that can be saved and viewed offline. The packager can create:
+    HtmlPackager is a small utility class used to package HTML content into a self contained HTML document 
+   both as a single file, or a folder with all dependencies copied to local. It provides a programmatic way
+   to perform a similar task to Browser **Save As...** operations that capture page output to disk.
     
-    * A self-contained, very large HTML file with all resources embedded inline
+   The packager can create:
+    
+    * A single, self-contained and very large HTML file with all resources embedded inline
     * An HTML file with all resources copied local into the same folder as the document
 
-    
+    This library provides both a Windows Console application EXE as well as a .NET based library
+    for HTML packaging.    
 		</description>
 		<iconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</iconUrl>
         <summary>A recursive file and folder deletion command line utility, that supports deeply nested folder structures and timed deletions.</summary>
