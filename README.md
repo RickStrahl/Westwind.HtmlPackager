@@ -2,14 +2,17 @@
 
 <img src="HtmlPackagerIcon.png" align="left" />
 
-HtmlPackager is a tiny utility standalone Windows Exe or .NET component that allows you to package Web HTML content as local content that can be saved and viewed offline. 
+HtmlPackager is a tiny standalone Windows Exe or .NET component that allows you to package content from a URL as a self-contained, local HTML file that can be saved and viewed offline.
 
 The packager can create:
 
 * **A single, large Self-Contained HTML File**
 * **An HTML file with external, local Assets**
 
-This library is provided as a small .NET 4.5 executable and .NET Library and distributed via [Chocolatey](https://chocolatey.org/packages/HtmlPackager) and [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) Packages respectively.
+This library is provided as a small **.NET 4.5 executable** and **.NET Library** and distributed via:
+
+* [Chocolatey](https://chocolatey.org/packages/HtmlPackager) 
+* [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) 
 
 The packager works with:
 
@@ -22,7 +25,7 @@ There are two packaging modes:
 All related resources are downloaded and embedded into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded.
 
 * **HTML file plus loose Resource Files**  
-Produces a folder with an HTML file and all CSS, Script, images, fonts as loose file.
+Produces an HTML file plus all CSS, Script, images, fonts as loose files stored in the same folder as the HTML.
 
 The .NET EXE is a single file EXE that requires .NET 4.5+.
 
@@ -34,7 +37,7 @@ Supported .NET Targets:
 * .NET Standard 2.0
 
 ## Standalone HtmlPackager Application (Windows)
-The HTML Packager is available as a self contained Windows Console application in HtmlPackager.exe which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe). You can also use the Chocolatey package:
+The HTML Packager is available as a self contained Windows Console application in HtmlPackager.exe which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe). You can also use the [Chocolatey](https://chocolatey.org/packages/HtmlPackager) package:
 
 ```
 choco install HtmlPackager
