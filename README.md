@@ -1,6 +1,6 @@
 # Westwind.HtmlPackager
 
-<img src="HtmlPackagerIcon.png" align="left" />
+<img src="HtmlPackagerIcon.png" />
 
 HtmlPackager is a tiny standalone Windows Exe or .NET component that allows you to package content from a URL as a self-contained, local HTML file that can be saved and viewed offline.
 
