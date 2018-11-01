@@ -33,6 +33,7 @@
 
 using System;
 using System.Reflection;
+using Westwind.HtmlPackager.Utilities;
 
 namespace HtmlPackager
 {
@@ -73,6 +74,27 @@ namespace HtmlPackager
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Processing {Parser.SourceUrl}...");
 
+
+            if (Parser.ZipDependencies)
+            {
+                if (!packager.PackageHtmlToZipFile(Parser.SourceUrl, Parser.TargetFile))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Failed to create Zip file");
+                    Console.WriteLine(packager.ErrorMessage);
+                    Console.ForegroundColor = consoleColor;
+                    return false;
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Done. Created {Parser.TargetFile} Zip file output.");
+                Console.ForegroundColor = consoleColor;
+
+                if (Parser.DisplayHtml)                
+                    Utils.GoUrl(Parser.TargetFile);                
+                return true;
+            }
+
             if (Parser.ExternalDependencies)
             {
                 if (!packager.PackageHtmlToFolder(Parser.SourceUrl, Parser.TargetFile, null,
@@ -80,6 +102,7 @@ namespace HtmlPackager
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error: Failed to create HTML output.");
+                    Console.WriteLine(packager.ErrorMessage);
                     Console.ForegroundColor = consoleColor;
                     return false;
                 }
@@ -87,6 +110,10 @@ namespace HtmlPackager
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Done. Created {Parser.TargetFile} plus dependencies.");
                 Console.ForegroundColor = consoleColor;
+
+                if (Parser.DisplayHtml)
+                    Utils.GoUrl(Parser.TargetFile);
+
                 return true;
             }
 
@@ -102,6 +129,9 @@ namespace HtmlPackager
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Done. Created {Parser.TargetFile}.");
             Console.ForegroundColor = consoleColor;
+
+            if (Parser.DisplayHtml)
+                Utils.GoUrl(Parser.TargetFile);
 
             return true;
         }

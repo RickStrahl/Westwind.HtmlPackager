@@ -31,16 +31,18 @@ HELP || /?          This help display
 Options:
 --------
 sourceUrl           Source Url or local file to an HTML document
--o <outputFile>     Output HTML file
-                    (if output file is not provided output is sent to StdOut)
+-o <outputFile>     Output HTML file or Zip file (-z)
+                    (if output file is not provided output is sent to StdOut)                                       
 -x                  Create external dependencies in folder of HTML document
--d                  Display generated HTML page
+-z                  Create zip file with all dependencies included in zip
+-d                  Display generated HTML page or Zip file
 
 Examples:
 ---------
 HtmlPackager  https://github.com -o c:\temp\github_home.html
 HtmlPackager  c:\documents\somePage.html -o c:\temp\app_saved.html -x -d
 HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
+HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
 ";
 
                 Console.WriteLine(options);                

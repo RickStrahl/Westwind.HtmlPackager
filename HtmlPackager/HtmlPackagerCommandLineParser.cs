@@ -29,6 +29,12 @@ namespace HtmlPackager
         public bool ExternalDependencies { get; set; }
 
         /// <summary>
+        /// If true creates a self contained zip file of the html file plus
+        /// all of its dependencies.
+        /// </summary>
+        public bool ZipDependencies { get; set; }
+
+        /// <summary>
         /// When true displays the result HTML in the default
         /// browser.        
         /// </summary>
@@ -43,6 +49,7 @@ namespace HtmlPackager
         {
             SourceUrl = Args[0];
             ExternalDependencies = ParseParameterSwitch("-x");
+            ZipDependencies = ParseParameterSwitch("-z");
             DisplayHtml = ParseParameterSwitch("-d");
             TargetFile = ParseStringParameterSwitch("-o", null);            
 
@@ -55,5 +62,6 @@ namespace HtmlPackager
             if (!string.IsNullOrEmpty(TargetFile) && TargetFile.Contains("%"))
                 TargetFile = Environment.ExpandEnvironmentVariables(TargetFile);
         }
+
     }
 }

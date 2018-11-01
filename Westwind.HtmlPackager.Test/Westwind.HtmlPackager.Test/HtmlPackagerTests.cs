@@ -81,7 +81,7 @@ namespace Westwind.HtmlPackager.Test
         {
             var packager = new HtmlPackager();
             string outputFile = @"c:\temp\GeneratedHtml\Output.html";
-            bool result = packager.PackageHtmlToFolder("http://west-wind.com/", outputFile, null, true);
+            bool result = packager.PackageHtmlToFolder("https://west-wind.com/", outputFile, null, true);
             Assert.IsTrue(result);
 
             ShellUtils.GoUrl(outputFile);
@@ -89,5 +89,17 @@ namespace Westwind.HtmlPackager.Test
 
 
         }
+
+        [TestMethod]
+        public void PackageLooseFilesWebUrlToZipTest()
+        {
+            var packager = new HtmlPackager();
+            string zipFile = @"c:\temp\GeneratedHtml\HtmlOutput.zip";
+            bool result = packager.PackageHtmlToZipFile("https://MarkdownMonster.west-wind.com/",zipFile);
+            Assert.IsTrue(result, packager.ErrorMessage);
+
+            ShellUtils.GoUrl(zipFile);
+        }
+
     }
 }

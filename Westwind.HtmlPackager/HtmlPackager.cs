@@ -34,6 +34,7 @@
 
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -278,6 +279,41 @@ namespace Westwind.HtmlPackager
             return PackageHtmlToFile(urlOrFile, outputFile, basePath, true);
         }
 
+        /// <summary>
+        /// Packages HTML files to a zip file.
+        /// </summary>
+        /// <param name="urlOrFile"></param>
+        /// <param name="outputZipFile"></param>
+        /// <param name="basePath"></param>
+        /// <returns></returns>
+        public bool PackageHtmlToZipFile(string urlOrFile, string outputZipFile, string basePath = null)
+        {
+            if (File.Exists(outputZipFile))
+                File.Delete(outputZipFile);
+
+            var folder = Path.Combine(Path.GetTempPath(), "_" + Utils.GenerateUniqueId());
+            var htmlFile = Path.Combine(folder,Path.GetFileName(Path.ChangeExtension(outputZipFile, "html")));
+
+            Directory.CreateDirectory(folder);
+
+            if (!PackageHtmlToFolder(urlOrFile, htmlFile, basePath))
+                return false;
+
+            try
+            {
+                ZipFile.CreateFromDirectory(folder, outputZipFile, CompressionLevel.Fastest, false);
+            }
+            catch (Exception ex)
+            {
+                SetError("Unable to package output files: " + ex.Message);
+                return false;
+            }
+
+            Directory.Delete(folder, true);
+
+            return true;
+        }
+
         #endregion
 
         #region Processors
@@ -301,19 +337,17 @@ namespace Westwind.HtmlPackager
                 if (url == null)
                     continue;
 
-                string cssText;
-                string justFilename = null;
+                string cssText;                
 
                 if (url.StartsWith("http"))
                 {
                     var http = new WebClient();
-                    cssText = http.DownloadString(url);
+                    cssText = http.DownloadString(url);                    
                 }
                 else if (url.StartsWith("file:///"))
                 {                                       
                    url = url.Substring(8);
-                   cssText = File.ReadAllText(WebUtility.UrlDecode(url));
-                   justFilename = Path.GetFileName(url);
+                   cssText = File.ReadAllText(WebUtility.UrlDecode(url));                   
                 }
                 else // Relative Path
                 {
@@ -325,18 +359,18 @@ namespace Westwind.HtmlPackager
                         cssText = http.DownloadString(url);
                     }
                     else
-                        cssText = File.ReadAllText(WebUtility.UrlDecode(url));
-
-                    justFilename = Path.GetFileName(url);                    
+                        cssText = File.ReadAllText(WebUtility.UrlDecode(url));                                     
                 }
 
                 cssText = ProcessUrls(cssText, url);
 
                 if (CreateExternalFiles)
                 {
-                    if (string.IsNullOrEmpty(justFilename))
+                    var justFilename = Path.GetFileName(url);
+                    string justExt = Path.GetExtension(url);
+                    if (string.IsNullOrEmpty(justExt))
                         justFilename = Utils.GenerateUniqueId(10) + ".css";
-
+                    
                     var fullPath = Path.Combine(OutputPath, justFilename);
                     File.WriteAllText(fullPath, cssText);
                     link.Attributes["href"].Value = justFilename;                    
@@ -530,8 +564,11 @@ namespace Westwind.HtmlPackager
                 var url = Utils.ExtractString(matched,"(", ")")?.Trim(new char[] {'\'', '\"'}).Replace("&amp;","").Replace("quot;","");
                 if (url.Contains("?"))
                     url = Utils.ExtractString(url, "", "?");
-                                
+
                 
+                if (url.EndsWith(".eot") || url.EndsWith(".ttf"))
+                    continue;
+
                 if (url.StartsWith("http"))
                 {
                     var http = new WebClient();
