@@ -48,7 +48,7 @@ The packager runs as a single file EXE (packaged with ILMerge) with a few comman
 ```txt
 Syntax:
 -------
-HtmlPackager <sourceUrl> -o <outputFile> -x -d
+HtmlPackager <sourceUrl> -o <outputFile> [-x|-z] -d
 
 Commands:
 ---------
@@ -57,10 +57,11 @@ HELP || /?          This help display
 Options:
 --------
 sourceUrl           Source Url or local file to an HTML document
--o <outputFile>     Output HTML file
-                    (if output file is not provided output is sent to StdOut)
+-o <outputFile>     Output HTML file or Zip file (-z)
+                    (if output file is not provided output is sent to StdOut)                                       
 -x                  Create external dependencies in folder of HTML document
--d                  Display generated HTML page
+-z                  Create zip file with all dependencies included in zip
+-d                  Display generated HTML page or Zip file
 ```
 
 ### Examples
@@ -82,6 +83,12 @@ Create a self-contained HTML file from a local HTML file:
 
 ```
 HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
+```
+
+Package to a Zip file:
+
+```
+HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
 ```
 
 ## .NET Library and C# Source Code
@@ -171,7 +178,7 @@ The Westwind.HtmlPackager library is license  under the [MIT License](https://op
 
 All source code is copyright West Wind Technologies, regardless of changes made to them. Any source code modifications must leave the original copyright code headers intact.
 
-> If you're feeling generous and you find this tool useful consider making a small donation:
+> It's free as in free beer, but if this saved you some time and you're overflowing with gratitude you can buy me a beer:
 >
 > [Make a Donation with PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DJJHMXWYPT3E2)
 
