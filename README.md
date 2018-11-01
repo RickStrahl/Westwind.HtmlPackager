@@ -6,8 +6,9 @@ HtmlPackager is a tiny standalone Windows Exe or .NET component that allows you 
 
 The packager can create:
 
-* **A single, large Self-Contained HTML File**
-* **An HTML file with external, local Assets**
+* **A single, large self-contained HTML File**
+* **An HTML file with external, local assets**
+* **A Zip package of the latter file and folder assets**
 
 This library is provided as a small **.NET 4.5 executable** and **.NET Library** and distributed via:
 
