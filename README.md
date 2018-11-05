@@ -37,14 +37,24 @@ Supported .NET Targets:
 * .NET 4.5+
 * .NET Standard 2.0
 
-## Standalone HtmlPackager Application (Windows)
-The HTML Packager is available as a self contained Windows Console application in HtmlPackager.exe which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe). You can also use the [Chocolatey](https://chocolatey.org/packages/HtmlPackager) package:
+## Standalone HtmlPackager Windows Console Application
+The HTML Packager is available as a self contained Windows Console application (ILMerged single file EXE) in `HtmlPackager.exe` which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe).
+
+Alternatelym you can also use the [Chocolatey](https://chocolatey.org/packages/HtmlPackager) package:
 
 ```
 choco install HtmlPackager
 ```
 
-The packager runs as a single file EXE (packaged with ILMerge) with a few command line options.
+### Cross Platform .NET SDK Global Tool
+Alternately you can also install the cross-platform the `dotnet-htmlpackager` Nuget package that installs as a .NET SDK Global tool that can be globally  executed as `htmlpackager` once installed on Windows, Mac and Linux as long as you have the [.NET SDK 2.1 or later installed](https://www.microsoft.com/net/download/dotnet-core/2.1).
+
+```
+dotnet tool install -g dotnet-htmlpackager
+```
+
+### Command Line Options
+The tool allows for a number of command line options to determine how output is returned from a URL.
 
 ```txt
 Syntax:

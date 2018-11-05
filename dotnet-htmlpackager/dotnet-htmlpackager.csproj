@@ -2,26 +2,27 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>0.1.4.4</Version>
-    <FileVersion>0.1.4.4</FileVersion>
+    <Version>0.1.4.6</Version>
+    <FileVersion>0.1.4.6</FileVersion>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>HtmlPackager</PackageId>
+    <PackageId>dotnet-htmlpackager</PackageId>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
     <Product>HtmlPackager</Product>
     <Copyright>© Rick Strahl - West Wind Technologies, 2018</Copyright>
 
-    <Description>
-      HtmlPackager is a small utility used to package HTML content into a self contained HTML document either as a single file, a folder with all dependencies copied to local or a zip file. It provides a programmatic way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
+    <Description>HtmlPackager is a small console .NET SDK tools used to package HTML content into a self contained HTML document either as a single file or console output stream, a folder with all dependencies copied to local or a zip file. It provides a automated way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
 
       The packager can create:
 
       * A single, self-contained and very large HTML file with all resources embedded inline
+      * A single output stream into StdOut that contains self contained HTML output as above
       * An HTML file with all resources copied local into the same folder as the document
       * A zip file of the latter output
 
-      This library provides Console application and .NET SDK Global Tool.
-    </Description>
+      This package is for the .NET SDK tooling, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a Nuget .NET Standard Library package (westwind.htmlpackager).
+
+</Description>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#License</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</RepositoryUrl>
@@ -30,7 +31,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</PackageIconUrl>
 
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>HtmlPackager</ToolCommandName>
+    <ToolCommandName>htmlpackager</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
 

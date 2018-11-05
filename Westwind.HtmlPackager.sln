@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chocolatey", "Chocolatey", 
 		Chocolatey\HtmlPackager.nuspec = Chocolatey\HtmlPackager.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPackager", "HtmlPackager\HtmlPackager.csproj", "{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-htmlpackager", "dotnet-htmlpackager\dotnet-htmlpackager.csproj", "{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

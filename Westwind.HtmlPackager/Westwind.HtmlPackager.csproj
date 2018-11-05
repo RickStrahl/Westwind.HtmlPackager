@@ -1,21 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.1.4.2</Version>
+    <Version>0.1.4.6</Version>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technologies</Company>
     <Product>HtmlPackager</Product>
     <Title>HtmlPackager</Title>
     <Description>
-      HtmlPackager is a small utility class used to package HTML content into a self contained HTML document either as a single file, a folder with all dependencies copied to local or a zip file. It provides a programmatic way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
+      HtmlPackager is a small library used to package HTML content into a self contained HTML document either as a single file or console output stream, a folder with all dependencies copied to local or a zip file. It provides an automated, programmatic way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
 
       The packager can create:
 
       * A single, self-contained and very large HTML file with all resources embedded inline
+      * A single output stream into StdOut that contains self contained HTML output as above
       * An HTML file with all resources copied local into the same folder as the document
       * A zip file of the latter output
 
-      This library provides both a .NET Library and a Windows Console application EXE in a separate Chocolatey Package.
+      This package is for the .NET Standard 2.0 library, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a cross platform .NET SDK Too(westwind.htmlpackager.console).
     </Description>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#License</PackageLicenseUrl>
@@ -25,7 +26,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</PackageIconUrl>
     <Copyright>© Rick Strahl - West Wind Technologies, 2018</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes />    
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>
