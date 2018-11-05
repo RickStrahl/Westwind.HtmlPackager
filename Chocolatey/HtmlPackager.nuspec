@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>HtmlPackager</id>
-        <version>0.1.3.1</version>
+        <version>0.1.4</version>
         <title>West Wind HTML Packager</title>
         <authors>Rick Strahl,West Wind Technologies</authors>
         <owners>West Wind Technologies</owners>
@@ -12,17 +12,15 @@
         <docsUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#standalone-htmlpackager-application-windows</docsUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>
-    HtmlPackager is a small utility class used to package HTML content into a self contained HTML document 
-   both as a single file, or a folder with all dependencies copied to local. It provides a programmatic way
-   to perform a similar task to Browser **Save As...** operations that capture page output to disk.
+HtmlPackager is a small utility class used to package HTML content into a self contained HTML document both as a single file, or a folder with all dependencies copied to local. It provides a programmatic way to perform a similar task to Browser **Save As...** operations that capture page output to disk.
     
-   The packager can create:
+The packager can create:
     
-    * A single, self-contained and very large HTML file with all resources embedded inline
-    * An HTML file with all resources copied local into the same folder as the document
+* A single, self-contained and very large HTML file with all resources embedded inline
+* An HTML file with all resources copied local into the same folder as the document
+* A Zip package of the latter HTML file plus dependencies
 
-    This library provides both a Windows Console application EXE as well as a .NET based library
-    for HTML packaging available as a Nuget Package.
+This library provides both a Windows Console application EXE as well as a .NET based library for HTML packaging available as a Nuget Package.
 		</description>
 		<iconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</iconUrl>
         <summary>Small utilitys used to package HTML content into a self contained HTML document both as a single file, or a folder with all dependencies copied to local.</summary>

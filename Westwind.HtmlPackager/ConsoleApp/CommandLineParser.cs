@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HtmlPackager
+namespace HtmlPackager.ConsoleApp
 {
     /// <summary>
     /// Basic Command Line Parser class that can deal with simple

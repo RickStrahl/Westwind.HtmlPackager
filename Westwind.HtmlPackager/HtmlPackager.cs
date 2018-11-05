@@ -261,6 +261,7 @@ namespace Westwind.HtmlPackager
         ///
         /// If the document itself contains a BASE tag this value is not used.
         /// </param>
+        /// <param name="deleteFolderContents">If true deletes folder contents first</param>
         /// <returns>HTML string or null</returns>
         public bool PackageHtmlToFolder(string urlOrFile, string outputFile, string basePath = null, bool deleteFolderContents = false)
         {

@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.1.4</Version>
+    <Version>0.1.4.2</Version>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technologies</Company>
-    <Product>West Wind Web Toolkit</Product>
-    <Title>Westwind Web AspNet Core Support Library</Title>
+    <Product>HtmlPackager</Product>
+    <Title>HtmlPackager</Title>
     <Description>
       HtmlPackager is a small utility class used to package HTML content into a self contained HTML document either as a single file, a folder with all dependencies copied to local or a zip file. It provides a programmatic way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
 

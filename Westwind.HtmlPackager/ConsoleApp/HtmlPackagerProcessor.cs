@@ -35,7 +35,7 @@ using System;
 using System.Reflection;
 using Westwind.HtmlPackager.Utilities;
 
-namespace HtmlPackager
+namespace HtmlPackager.ConsoleApp
 {
     public class HtmlPackagerProcessor
     {
@@ -48,8 +48,7 @@ namespace HtmlPackager
 
         public bool Process()
         {
-            var packager = new Westwind.HtmlPackager.HtmlPackager();
-
+            var packager = new Westwind.HtmlPackager.HtmlPackager();            
             var consoleColor = Console.ForegroundColor;
 
             if (string.IsNullOrEmpty(Parser.TargetFile))

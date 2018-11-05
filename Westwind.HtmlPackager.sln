@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westwind.HtmlPackager", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westwind.HtmlPackager.Test", "Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test\Westwind.HtmlPackager.Test.csproj", "{625D256C-94D1-4854-9E45-DA8BED5E8FB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPackager", "HtmlPackager\HtmlPackager.csproj", "{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPackagerConsole", "HtmlPackagerConsole\HtmlPackagerConsole.csproj", "{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{719FA7E6-B8BD-4EA4-8B7E-D91A551D4B5A}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chocolatey", "Chocolatey", 
 		Chocolatey\tools\chocolateyInstall.ps1 = Chocolatey\tools\chocolateyInstall.ps1
 		Chocolatey\HtmlPackager.nuspec = Chocolatey\HtmlPackager.nuspec
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlPackager", "HtmlPackager\HtmlPackager.csproj", "{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12C8C5C3-E7AF-484F-AA70-EA98A27E2B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D311E0-CB34-4BF1-A9AC-9464B9AA2006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

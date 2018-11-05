@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HtmlPackagerCore": {
+      "commandName": "Project",
+      "commandLineArgs": "https://west-wind.com -o c:\\temp\\Captured\\HtmlOutput.html -x -d"
+    }
+  }
+}

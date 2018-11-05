@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HtmlPackager
+namespace HtmlPackager.ConsoleApp
 {
     public class HtmlPackagerCommandLineParser : CommandLineParser
     {

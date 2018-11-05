@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.Utilities;
 
-namespace HtmlPackagerCore
+namespace HtmlPackager
 {
     class Program
     {
@@ -42,7 +46,7 @@ HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.ht
 HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
 ";
 
-                Console.WriteLine(options);
+                Console.WriteLine(options);                
             }
             else
             {
@@ -57,12 +61,12 @@ HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
                     Utils.GoUrl(cmdLine.TargetFile);
             }
 
-#if DEBUG
+#if DEBUG            
 
             Console.WriteLine("Done. Press any key to exit...");
             Console.ReadKey();
 #endif
-
+            
         }
     }
 }
