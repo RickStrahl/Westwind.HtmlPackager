@@ -5,7 +5,7 @@
     <Version>0.1.4.4</Version>
     <FileVersion>0.1.4.4</FileVersion>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>HtmlPackagerCore</PackageId>
+    <PackageId>HtmlPackager</PackageId>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
     <Product>HtmlPackager</Product>
