@@ -1,4 +1,4 @@
-Westwind.HtmlPackager
+# Westwind.HtmlPackager
 
 <img src="HtmlPackagerIcon.png" />
 
@@ -132,10 +132,10 @@ or
 dotnet add package Westwind.HtmlPackager
 ```
 
-## Usage
+### Usage
 The following are various usage examples for packaging HTML from files or Web URLs into the two package formats.
 
-### Capture HTML File to embedded HTML as String
+#### Capture HTML File to embedded HTML as String
 The following captures the HTML to a single file string from a local file on disk:
 
 ```cs
@@ -150,7 +150,7 @@ File.WriteAllText(outputFile, packaged);
 Console.WriteLine(packaged);
 ```
 
-### Capture HTML File to embedded HTML as File
+#### Capture HTML File to embedded HTML as File
 
 ```cs
 var inputFile = Path.Combine(Path.GetTempPath(), "_MarkdownMonster_Preview.html");
