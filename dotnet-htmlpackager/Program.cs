@@ -36,10 +36,10 @@ sourceUrl           Source Url or local file to an HTML document
 
 Examples:
 ---------
-HtmlPackager  https://github.com -o c:\temp\github_home.html
+HtmlPackager  https://markdownmonster.west-wind.com -o c:\temp\mm_home.html -d
 HtmlPackager  c:\documents\somePage.html -o c:\temp\app_saved.html -x -d
 HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
-HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
+HtmlPackager  https://getbootstrap.com -o c:\temp\westwind.zip -z -d
 ";
 
                 Console.WriteLine(options);

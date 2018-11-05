@@ -1,4 +1,4 @@
-# Westwind.HtmlPackager
+Westwind.HtmlPackager
 
 <img src="HtmlPackagerIcon.png" />
 
@@ -10,10 +10,11 @@ The packager can create:
 * **An HTML file with external, local assets**
 * **A Zip package of the latter file and folder assets**
 
-This library is provided as a small **.NET 4.5 executable** and **.NET Library** and distributed via:
+This library is provided as a **.NET Library**, a small Windows **.NET 4.5 Cosole executable** and as a cross-platform  **.NET SDK Tool**:
 
 * [Chocolatey](https://chocolatey.org/packages/HtmlPackager) 
 * [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) 
+* [NuGet .NET SDK Tool](https://www.nuget.org/packages/dotnet-htmlpackager) 
 
 The packager works with:
 
@@ -23,13 +24,12 @@ The packager works with:
 There are two packaging modes:
 
 * **Package to a single file**  
-All related resources are downloaded and embedded into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded.
+All related resources are downloaded and embedded into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded. 
 
 * **HTML file plus loose Resource Files**  
-Produces an HTML file plus all CSS, Script, images, fonts as loose files stored in the same folder as the HTML.
+Produces an HTML file plus all CSS, Script, images, fonts as loose files stored in the same folder as the HTML. An option also allows packaging the folder as a Zip file.
 
-The .NET EXE is a single file EXE that requires .NET 4.5+.
-
+## .NET Library
 The .NET library allows embedding of the packaging functionality into your own applicaitons. It is very small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. The library has an external dependency on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
 
 Supported .NET Targets:
@@ -37,20 +37,31 @@ Supported .NET Targets:
 * .NET 4.5+
 * .NET Standard 2.0
 
-## Standalone HtmlPackager Windows Console Application
+## Standalone Command Line Tools
+There are a also a small Windows **.NET 4.5 Cosole executable** and as a cross-platform  **.NET SDK Tool** that allow you to run this tool from the command line.
+
+### HtmlPackager Windows Console Application
 The HTML Packager is available as a self contained Windows Console application (ILMerged single file EXE) in `HtmlPackager.exe` which [you can download and copy as needed](https://github.com/RickStrahl/Westwind.HtmlPackager/blob/master/HtmlPackager.exe).
 
-Alternatelym you can also use the [Chocolatey](https://chocolatey.org/packages/HtmlPackager) package:
+Alternately you can also use the [Chocolatey](https://chocolatey.org/packages/HtmlPackager) package:
 
 ```
 choco install HtmlPackager
 ```
 
 ### Cross Platform .NET SDK Global Tool
-Alternately you can also install the cross-platform the `dotnet-htmlpackager` Nuget package that installs as a .NET SDK Global tool that can be globally  executed as `htmlpackager` once installed on Windows, Mac and Linux as long as you have the [.NET SDK 2.1 or later installed](https://www.microsoft.com/net/download/dotnet-core/2.1).
+You can also install the cross-platform the `dotnet-htmlpackager` Nuget package that installs as a .NET SDK Global tool that can be globally  executed as `htmlpackager` once installed on Windows, Mac and Linux as long as you have the [.NET SDK 2.1 or later installed](https://www.microsoft.com/net/download/dotnet-core/2.1).
+
+To install the tool:
 
 ```
 dotnet tool install -g dotnet-htmlpackager
+```
+
+To uninstall
+
+```
+dotnet tool uninstall -g dotnet-htmlpackager
 ```
 
 ### Command Line Options
@@ -81,7 +92,7 @@ The following are a few examples you can try to capture output.
 Create a single self-contained HTML document from a URL and display in your browser:
 
 ```
-HtmlPackager  https://markdownmonster.west-wind.com  -o c:\temp\github_home.html -d
+HtmlPackager  https://markdownmonster.west-wind.com  -o c:\temp\mm-output.html -d
 ```
 
 Create an HTML file from a URL with all dependencies stored as loose files in the output file's folder (`-x`) and display in your browser (`-d`):
@@ -95,6 +106,9 @@ Create a self-contained HTML file from a local HTML file:
 ```
 HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
 ```
+
+Note that environment variables in paths are autoexpanded - use whatever syntax is appropriate for your OS.
+
 
 Package to a Zip file:
 
