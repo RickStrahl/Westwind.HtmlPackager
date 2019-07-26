@@ -148,6 +148,7 @@ namespace Westwind.HtmlPackager
                 ProcessCss(doc);
                 ProcessScripts(doc);
                 ProcessImages(doc);
+                ProcessAudio(doc);
             }
             else
             {
@@ -189,6 +190,7 @@ namespace Westwind.HtmlPackager
                     ProcessCss(doc);
                     ProcessScripts(doc);
                     ProcessImages(doc);
+                    ProcessAudio(doc);
                 }
                 finally
                 {
@@ -479,7 +481,7 @@ namespace Westwind.HtmlPackager
                     try
                     {
                         imageData = File.ReadAllBytes(url);
-                        contentType = Utils.GetImageMediaTypeFromFilename(url);
+                        contentType = Utils.GetMediaTypeFromFilename(url);
                     }
                     catch
                     {
@@ -500,7 +502,7 @@ namespace Westwind.HtmlPackager
                         else
                             imageData = File.ReadAllBytes(WebUtility.UrlDecode(url.Replace("file:///", "")));
 
-                        contentType = Utils.GetImageMediaTypeFromFilename(url);
+                        contentType = Utils.GetMediaTypeFromFilename(url);
                     }
                     catch
                     {
@@ -537,6 +539,94 @@ namespace Westwind.HtmlPackager
                     string data = $"data:{contentType};base64,{Convert.ToBase64String(imageData)}";
                     el.Attributes["src"].Value = data;
                 }              
+            }
+        }
+
+        private void ProcessAudio(HtmlDocument doc)
+        {
+            var images = doc.DocumentNode.SelectNodes("//audio");
+            if (images == null || images.Count < 1)
+                return;
+
+            foreach (var image in images)
+            {
+                var url = image.Attributes["src"]?.Value;
+                if (url == null)
+                    continue;
+
+                byte[] imageData;
+                string contentType;
+                if (url.StartsWith("http"))
+                {
+                    var http = new WebClient();
+                    imageData = http.DownloadData(url);
+                    contentType = http.ResponseHeaders[System.Net.HttpResponseHeader.ContentType];
+                }
+                else if (url.StartsWith("file:///"))
+                {
+                    url = url.Substring(8);
+
+                    try
+                    {
+                        imageData = File.ReadAllBytes(url);
+                        contentType = Utils.GetMediaTypeFromFilename(url);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+                else // Relative Path
+                {
+                    try
+                    {
+                        var uri = new Uri(BaseUri, url);
+                        url = uri.AbsoluteUri;
+                        if (url.StartsWith("http") && url.Contains("://"))
+                        {
+                            var http = new WebClient();
+                            imageData = http.DownloadData(url);
+                        }
+                        else
+                            imageData = File.ReadAllBytes(WebUtility.UrlDecode(url.Replace("file:///", "")));
+
+                        contentType = Utils.GetMediaTypeFromFilename(url);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+
+                if (imageData == null)
+                    continue;
+
+
+                var el = image;
+                el.Name = "audio";
+
+                if (CreateExternalFiles)
+                {
+                    var ext = "mp3";
+                    if (contentType == "audio/mp4")
+                        ext = "mp4";
+                    else if (contentType == "audio/vnd.wav")
+                        ext = "wav";
+
+                    string justFilename = Path.GetFileName(url);
+                    string justExt = Path.GetExtension(url);
+                    if (string.IsNullOrEmpty(justExt))
+                        justFilename = Utils.GenerateUniqueId(10) + "." + ext;
+
+                    var fullPath = Path.Combine(OutputPath, justFilename);
+                    File.WriteAllBytes(fullPath, imageData);
+                    el.Attributes["src"].Value = justFilename;
+                }
+                else
+                {
+                    string data = $"data:{contentType};base64,{Convert.ToBase64String(imageData)}";
+                    el.Attributes["src"].Value = data;
+                }
             }
         }
 
@@ -583,7 +673,7 @@ namespace Westwind.HtmlPackager
                     
                     try
                     {         
-                        contentType = Utils.GetImageMediaTypeFromFilename(url);                        
+                        contentType = Utils.GetMediaTypeFromFilename(url);                        
                         if (contentType == "application/image")
                             continue;
 
@@ -609,7 +699,7 @@ namespace Westwind.HtmlPackager
                         else
                             linkData = File.ReadAllBytes(WebUtility.UrlDecode(url.Replace("file:///","")));
 
-                        contentType = Utils.GetImageMediaTypeFromFilename(url);
+                        contentType = Utils.GetMediaTypeFromFilename(url);
                     }
                     catch
                     {

@@ -135,47 +135,49 @@ namespace Westwind.HtmlPackager.Utilities
         }
 
         /// <summary>
-        /// Returns the image media type for a give file extension based
+        /// Returns the media type for a given file based on its extension
         /// on a filename or url passed in.
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        internal static string GetImageMediaTypeFromFilename(string file)
+        internal static string GetMediaTypeFromFilename(string file)
         {
             if (string.IsNullOrEmpty(file))
                 return file;
 
-
-
             string ext = System.IO.Path.GetExtension(file).ToLower();
-            if (ext == ".jpg" || ext == ".jpeg")
-                return "image/jpeg";
-            if (ext == ".png")
-                return "image/png";
-            if (ext == ".gif")
-                return "image/gif";
-            if (ext == ".bmp")
-                return "image/bmp";
-            if (ext == ".tif" || ext == ".tiff")
-                return "image/tiff";
-
-            // fonts
-            if (ext == ".woff")
-                return "application/font-woff";
-            if (ext == ".svg")
-                return "image/svg+xml";
-
-            // ignored fonts
-            if (ext == ".woff2")
-                return "font/woff2";
-            //if (ext == ".otf")
-            //    return "application/x-font-opentype";
-            //if (ext == ".ttf")
-            //    return "application/x-font-ttf";
-            //if (ext == ".eot")
-            //    return "application/vnd.ms-fontobject";
-
-            return "application/image";
+            switch (ext)
+            {
+                case ".jpg":
+                case ".jpeg":
+                    return "image/jpeg";
+                case ".png":
+                    return "image/png";
+                case ".gif":
+                    return "image/gif";
+                case ".bmp":
+                    return "image/bmp";
+                case ".tif":
+                case ".tiff":
+                    return "image/tiff";
+                case ".woff":
+                    return "application/font-woff";
+                case ".svg":
+                    return "image/svg+xml";
+                case ".woff2":
+                    return "font/woff2";
+                case ".au":
+                case ".snd":
+                    return "audio/basic";
+                case ".mp3":
+                    return "audio/mpeg";
+                case ".mp4":
+                    return "audio/mp4";
+                case ".wav":
+                    return "audio/vnd.wav";
+                default:
+                    return "application/image";
+            }
         }
 
         /// <summary>
