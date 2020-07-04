@@ -65,8 +65,7 @@ namespace Westwind.HtmlPackager
         /// </summary>
         public string OutputPath { get; set; }
 
-
-
+    
         /// <summary>
         /// Internal flag to determine if files are 
         /// </summary>
@@ -83,6 +82,8 @@ namespace Westwind.HtmlPackager
         /// Internal naming counter
         /// </summary>
         int ctr = 0;
+
+        
 
         #region Main API
 
@@ -105,7 +106,7 @@ namespace Westwind.HtmlPackager
         /// <param name="createExternalFiles"></param>
         /// <returns>HTML string or null</returns>
         public string PackageHtml(string urlOrFile, string basePath = null, bool createExternalFiles = false)
-        {
+        {            
             if (string.IsNullOrEmpty(urlOrFile))
                 return urlOrFile;
 
@@ -126,6 +127,7 @@ namespace Westwind.HtmlPackager
                 HtmlWeb web = null;
                 try
                 {
+                    OnMessage("Loading source url: " + urlOrFile, MessageModes.Information);
                     web = new HtmlWeb();
                     doc = web.Load(urlOrFile);
                 }
@@ -141,21 +143,23 @@ namespace Westwind.HtmlPackager
                     basePath = docBase.Attributes["href"]?.Value;
                     BaseUri = new Uri(baseUri: new Uri(urlOrFile),relativeUri: basePath,dontEscape: true);
                 }
-
                 docBase?.Remove();
 
                 ctr = 0;
                 ProcessCss(doc);
                 ProcessScripts(doc);
                 ProcessImages(doc);
+                ProcessLinks(doc);
             }
             else
             {
 
                 try
                 {
+                    OnMessage("Loading source url: " + urlOrFile, MessageModes.Information);
                     doc = new HtmlDocument();
                     doc.Load(urlOrFile);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -189,6 +193,7 @@ namespace Westwind.HtmlPackager
                     ProcessCss(doc);
                     ProcessScripts(doc);
                     ProcessImages(doc);
+                    ProcessLinks(doc);
                 }
                 finally
                 {
@@ -196,9 +201,7 @@ namespace Westwind.HtmlPackager
                 }
             }
 
-
-            var html = doc.DocumentNode.InnerHtml;
-            //html = ProcessUrls(html, basePath);
+            var html = doc.DocumentNode.InnerHtml;            
 
             if (tempFile != null)
                 File.Delete(tempFile);
@@ -265,19 +268,27 @@ namespace Westwind.HtmlPackager
         /// <returns>HTML string or null</returns>
         public bool PackageHtmlToFolder(string urlOrFile, string outputFile, string basePath = null, bool deleteFolderContents = false)
         {
-            OutputPath = Path.GetDirectoryName(outputFile);
-
-            if (deleteFolderContents && Directory.Exists(OutputPath))
+            try
             {
-                foreach (var file in Directory.GetFiles(OutputPath))
-                    File.Delete(file);
+                OutputPath = Path.GetDirectoryName(outputFile);
+
+                if (deleteFolderContents && Directory.Exists(OutputPath))
+                {
+                    foreach (var file in Directory.GetFiles(OutputPath))
+                        File.Delete(file);
+                }
+
+                if (!Directory.Exists(OutputPath))
+                    Directory.CreateDirectory(OutputPath);
+
+
+                return PackageHtmlToFile(urlOrFile, outputFile, basePath, true);
             }
-            
-            if (!Directory.Exists(OutputPath))            
-                Directory.CreateDirectory(OutputPath);                
-            
-            
-            return PackageHtmlToFile(urlOrFile, outputFile, basePath, true);
+            catch (Exception ex)
+            {
+                SetError("An error occurred: " + ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -332,28 +343,38 @@ namespace Westwind.HtmlPackager
 
                 if (rel != "stylesheet")
                     continue;
-
-                var originalUrl = url;
-
+               
                 if (url == null)
                     continue;
 
-                string cssText;                
+                string cssText;
+
+                var originalUrl = url;
+                Uri origUri = null;
 
                 if (url.StartsWith("http"))
                 {
+                    origUri = new Uri(url);
+                    OnMessage(" ==> loading css: " + origUri.AbsolutePath);
+
                     var http = new WebClient();
                     cssText = http.DownloadString(url);                    
                 }
                 else if (url.StartsWith("file:///"))
-                {                                       
-                   url = url.Substring(8);
+                {
+                    origUri = new Uri(url);
+                    OnMessage(" ==> loading css: " + origUri.AbsolutePath);
+
+                    url = url.Substring(8);
                    cssText = File.ReadAllText(WebUtility.UrlDecode(url));                   
                 }
                 else // Relative Path
                 {
-                    var uri = new Uri(BaseUri, url);
-                    url = uri.AbsoluteUri;
+                    origUri = new Uri(BaseUri, url);
+                    url = origUri.AbsoluteUri;
+
+                    OnMessage(" ==> loading css: " + url.ToString());
+
                     if (url.StartsWith("http") && url.Contains("://"))
                     {
                         var http = new WebClient();
@@ -363,18 +384,20 @@ namespace Westwind.HtmlPackager
                         cssText = File.ReadAllText(WebUtility.UrlDecode(url));                                     
                 }
 
-                cssText = ProcessUrls(cssText, url);
+                cssText = ProcessEmbeddedUrls(cssText, url);
 
                 if (CreateExternalFiles)
                 {
-                    var justFilename = Path.GetFileName(url);
-                    string justExt = Path.GetExtension(url);
+                    var justFilename = Path.GetFileName(origUri.AbsolutePath);
+                    string justExt = Path.GetExtension(origUri.AbsolutePath);
                     if (string.IsNullOrEmpty(justExt))
                         justFilename = Utils.GenerateUniqueId(10) + ".css";
                     
                     var fullPath = Path.Combine(OutputPath, justFilename);
                     File.WriteAllText(fullPath, cssText);
-                    link.Attributes["href"].Value = justFilename;                    
+                    link.Attributes["href"].Value = justFilename;
+
+                    OnMessage(" ==> writing css: " + url,MessageModes.Information2);
                 }
                 else
                 {
@@ -402,14 +425,22 @@ namespace Westwind.HtmlPackager
                 if (url == null)
                     continue;
 
+                Uri origUri = null;
+                
                 byte[] scriptData;
                 if (url.StartsWith("http"))
                 {
+                    origUri = new Uri(url);
+                    OnMessage(" ==> loading script: " + origUri.AbsolutePath);
+
                     var http = new WebClient();
-                    scriptData = http.DownloadData(url);                    
+                    scriptData = http.DownloadData(url);
                 }
                 else if (url.StartsWith("file:///"))
                 {
+                    origUri = new Uri(url);
+                    OnMessage(" ==> loading script: " + origUri.AbsolutePath);
+
                     url = url.Substring(8);
                     scriptData = File.ReadAllBytes(WebUtility.UrlDecode(url));                    ;
                 }
@@ -417,8 +448,11 @@ namespace Westwind.HtmlPackager
                 {
                     try
                     {
-                        var uri = new Uri(BaseUri, url);
-                        url = uri.AbsoluteUri;
+                        origUri = new Uri(BaseUri, url);
+                        url = origUri.AbsoluteUri;
+
+                        OnMessage(" ==> loading script: " + origUri.AbsolutePath);
+
                         if (url.StartsWith("http") && url.Contains("://"))
                         {
                             var http = new WebClient();
@@ -435,14 +469,15 @@ namespace Westwind.HtmlPackager
                 
                 if (CreateExternalFiles)
                 {
-                    var justFilename = Path.GetFileName(url);
-                    string justExt = Path.GetExtension(url);
+                    var justFilename = Path.GetFileName(origUri.AbsolutePath);
+                    string justExt = Path.GetExtension(origUri.AbsolutePath);
                     if (string.IsNullOrEmpty(justExt))
                         justFilename = Utils.GenerateUniqueId(10) + ".js";
 
                     var fullPath = Path.Combine(OutputPath,justFilename);
                     File.WriteAllBytes(fullPath,scriptData);
                     script.Attributes["src"].Value = justFilename;
+                    OnMessage(" ==> writing script: " + fullPath,MessageModes.Information2);
                 }
                 else
                 {
@@ -463,17 +498,24 @@ namespace Westwind.HtmlPackager
                 var url = image.Attributes["src"]?.Value;
                 if (url == null)
                     continue;
-
+                
                 byte[] imageData;
                 string contentType;
+                Uri origUri = null;
+
                 if (url.StartsWith("http"))
                 {
+                    origUri = new Uri(url);
+
+                    OnMessage(" ==> loading image: " + origUri.AbsolutePath);
                     var http = new WebClient();
                     imageData = http.DownloadData(url);
-                    contentType = http.ResponseHeaders[System.Net.HttpResponseHeader.ContentType];
+                    contentType = http.ResponseHeaders[HttpResponseHeader.ContentType];
                 }
                 else if(url.StartsWith("file:///"))
                 {
+                    origUri = new Uri(url);
+                    OnMessage(" ==> loading image: " + origUri.AbsolutePath);
                     url = url.Substring(8);
 
                     try
@@ -490,8 +532,10 @@ namespace Westwind.HtmlPackager
                 {
                     try
                     {
-                        var uri = new Uri(BaseUri, url);
-                        url = uri.AbsoluteUri;
+                        origUri = new Uri(BaseUri, url);
+                        url = origUri.AbsoluteUri;
+                        OnMessage(" ==> loading image: " + url);
+
                         if (url.StartsWith("http") && url.Contains("://"))
                         {
                             var http = new WebClient();
@@ -523,13 +567,15 @@ namespace Westwind.HtmlPackager
                     else if (contentType == "image/gif")
                         ext = "gif";
 
-                    string justFilename = Path.GetFileName(url);
+
+                    string justFilename = Path.GetFileName(origUri.LocalPath);
                     string justExt = Path.GetExtension(url);
                     if (string.IsNullOrEmpty(justExt))                         
                         justFilename = Utils.GenerateUniqueId(10) + "." + ext;
 
                     var fullPath = Path.Combine(OutputPath, justFilename);
                     File.WriteAllBytes(fullPath, imageData);
+                    OnMessage(" ==> writing image: " + fullPath,MessageModes.Information2);
                     el.Attributes["src"].Value = justFilename;
                 }
                 else
@@ -539,6 +585,41 @@ namespace Westwind.HtmlPackager
                 }              
             }
         }
+
+        private void ProcessLinks(HtmlDocument doc)
+        {
+            var links = doc.DocumentNode.SelectNodes("//a");
+            if (links == null || links.Count < 1)
+                return;
+
+
+            foreach (var link in links)
+            {
+                var url = link.Attributes["href"]?.Value;
+                
+                if (string.IsNullOrEmpty(url) ||
+                    url.StartsWith("http", comparisonType: StringComparison.InvariantCultureIgnoreCase) ||
+                    url.StartsWith("#") ||
+                    url.IndexOf("javascript:", StringComparison.InvariantCultureIgnoreCase) > -1)
+                    continue;
+                
+                OnMessage("==> Fixing up link: " + url);
+
+                try
+                {
+                    var uri = new Uri(BaseUri, url);                    
+                    link.Name = "a";
+                    var linkUrl = uri.ToString();
+                    link.Attributes["href"].Value = linkUrl;
+
+                    OnMessage("==> Fixed up with: " + uri,MessageModes.Information2);
+                }
+                catch
+                {
+                }
+            }
+        }
+
 
         private static Regex urlRegEx = new Regex("url\\(.*?\\)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
@@ -550,7 +631,7 @@ namespace Westwind.HtmlPackager
         /// <param name="html"></param>
         /// <param name="baseUrl"></param>
         /// <returns></returns>
-        private string ProcessUrls(string html, string baseUrl)
+        private string ProcessEmbeddedUrls(string html, string baseUrl)
         {
             var matches = urlRegEx.Matches(html);
             string contentType = null;
@@ -565,16 +646,17 @@ namespace Westwind.HtmlPackager
                 var url = Utils.ExtractString(matched,"(", ")")?.Trim(new char[] {'\'', '\"'}).Replace("&amp;","").Replace("quot;","");
                 if (url.Contains("?"))
                     url = Utils.ExtractString(url, "", "?");
-
                 
                 if (url.EndsWith(".eot") || url.EndsWith(".ttf"))
                     continue;
 
+                OnMessage(" ==> loading embedded: " + url);
+                
                 if (url.StartsWith("http"))
                 {
                     var http = new WebClient();
                     linkData = http.DownloadData(url);
-                    contentType = http.ResponseHeaders[System.Net.HttpResponseHeader.ContentType];
+                    contentType = http.ResponseHeaders[HttpResponseHeader.ContentType];
                 }
                 else if(url.StartsWith("file:///"))
                 {
@@ -635,7 +717,10 @@ namespace Westwind.HtmlPackager
                         justFilename = Utils.GenerateUniqueId(10) + "." + ext;
                     urlContent = "url('" + justFilename + "')";
 
-                    File.WriteAllBytes(Path.Combine(OutputPath, justFilename),linkData);
+                    var outputFile = Path.Combine(OutputPath, justFilename);
+                    File.WriteAllBytes(outputFile,linkData);
+
+                    OnMessage(" ==> embedded file: " + outputFile, MessageModes.Information2);
                 }
                 else
                 {
@@ -650,37 +735,65 @@ namespace Westwind.HtmlPackager
         }
         #endregion
 
+
+        /// <summary>
+        /// Event that can be intercepted to write out messages
+        /// while the url is being processed
+        /// </summary>
+        public event Action<string, MessageModes> WriteMessage;
+
+        /// <summary>
+        /// Used internally to write messages
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="mode"></param>
+        public void OnMessage(string message, MessageModes mode = MessageModes.Information)
+        {
+            if (WriteMessage != null)
+                WriteMessage(message, mode);
+        }
+
         #region Error Handler
 
         public string ErrorMessage { get; set; }
 
         protected void SetError()
         {
-            this.SetError("CLEAR");
+            SetError("CLEAR");
         }
 
         protected void SetError(string message)
         {
             if (message == null || message == "CLEAR")
             {
-                this.ErrorMessage = string.Empty;
+                ErrorMessage = string.Empty;
                 return;
             }
-            this.ErrorMessage += message;
+            ErrorMessage += message;
+
+            OnMessage("Error: " + message,MessageModes.Error);
         }
 
         protected void SetError(Exception ex, bool checkInner = false)
         {
             if (ex == null)
-                this.ErrorMessage = string.Empty;
+                ErrorMessage = string.Empty;
 
             Exception e = ex;
             if (checkInner)
                 e = e.GetBaseException();
 
             ErrorMessage = e.Message;
+            OnMessage("Error: " + ErrorMessage, MessageModes.Error);
         }
         #endregion
     }
 
+    public enum MessageModes
+    {
+        Information,
+        Information2,
+        Error,
+        Warning
+    }
 }

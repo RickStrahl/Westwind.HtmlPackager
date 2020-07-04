@@ -35,6 +35,12 @@ namespace HtmlPackager.ConsoleApp
         public bool ZipDependencies { get; set; }
 
         /// <summary>
+        /// Determines whether verbose messages will be written
+        /// as each file is processed.
+        /// </summary>
+        public bool Verbose { get; set; }
+
+        /// <summary>
         /// When true displays the result HTML in the default
         /// browser.        
         /// </summary>
@@ -47,11 +53,12 @@ namespace HtmlPackager.ConsoleApp
 
         public override void Parse()
         {
-            SourceUrl = Args[0];
+            SourceUrl = Arguments[0];
             ExternalDependencies = ParseParameterSwitch("-x");
             ZipDependencies = ParseParameterSwitch("-z");
             DisplayHtml = ParseParameterSwitch("-d");
-            TargetFile = ParseStringParameterSwitch("-o", null);            
+            TargetFile = ParseStringParameterSwitch("-o", null);
+            Verbose = ParseParameterSwitch("-v");
 
             if (string.IsNullOrEmpty(TargetFile))            
                 ExternalDependencies = false;

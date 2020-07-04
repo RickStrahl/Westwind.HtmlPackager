@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
-    <Version>0.1.4.6</Version>
+    <Version>0.1.7</Version>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technologies</Company>
     <Product>HtmlPackager</Product>
@@ -16,7 +16,7 @@
       * An HTML file with all resources copied local into the same folder as the document
       * A zip file of the latter output
 
-      This package is for the .NET Standard 2.0 library, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a cross platform .NET SDK Too(westwind.htmlpackager.console).
+      This package is for the .NET Standard 2.0 library, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a cross platform .NET SDK Tool(dotnet-htmlpackager).
     </Description>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RickStrahl/Westwind.HtmlPackager#License</PackageLicenseUrl>
@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
   </ItemGroup>
 
 </Project>

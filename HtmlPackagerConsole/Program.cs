@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlPackager.ConsoleApp;
+using Westwind.HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.Utilities;
 
 namespace HtmlPackager
@@ -19,11 +21,9 @@ namespace HtmlPackager
                 var ver = version.Major + "." + version.Minor + (version.Build > 0 ? "." + version.Build : string.Empty);
                 string options =
                     $@"
-Html Packager v{version}
-
 Syntax:
 -------
-HtmlPackager <sourceUrl> -o <outputFile> -x -d
+htmlpackager <sourceUrl> -o <outputFile> -x -d
 
 Commands:
 ---------
@@ -37,16 +37,17 @@ sourceUrl           Source Url or local file to an HTML document
 -x                  Create external dependencies in folder of HTML document
 -z                  Create zip file with all dependencies included in zip
 -d                  Display generated HTML page or Zip file
+-v                  Verbose messages
 
 Examples:
 ---------
-HtmlPackager  https://markdownmonster.west-wind.com -o c:\temp\mm_home.html -d
-HtmlPackager  c:\documents\somePage.html -o c:\temp\app_saved.html -x -d
-HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
-HtmlPackager  https://getbootstrap.com -o c:\temp\bootstrap.zip -z -d
+htmlpackager  https://github.com -o /temp.github_home.html
+htmlpackager  /documents/somePage.html -o /temp/app_saved.html -x -d
+htmlpackager  %userprofile%/Documents/myapp/somePage.html -o %TEMP%/app_saved.html
+htmlpackager  https://github.com -o /temp/github-home.zip -z -d
 ";
-
-                Console.WriteLine(options);                
+                ConsoleHelper.WriteWrappedHeader($"West Wind Html Packager v{ver}");
+                Console.WriteLine(options);
             }
             else
             {
@@ -58,15 +59,16 @@ HtmlPackager  https://getbootstrap.com -o c:\temp\bootstrap.zip -z -d
 
 
                 if (cmdLine.DisplayHtml && !string.IsNullOrEmpty(cmdLine.TargetFile))
-                    Utils.GoUrl(cmdLine.TargetFile);
+                    Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
             }
 
-#if DEBUG            
+#if DEBUG
 
             Console.WriteLine("Done. Press any key to exit...");
             Console.ReadKey();
 #endif
-            
+
         }
     }
+
 }

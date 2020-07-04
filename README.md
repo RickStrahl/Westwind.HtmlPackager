@@ -2,7 +2,7 @@
 
 <img src="HtmlPackagerIcon.png" />
 
-HtmlPackager is a tiny standalone Windows Exe or .NET component that allows you to package content from a URL as a self-contained, local HTML file that can be saved and viewed offline.
+HtmlPackager is a tiny standalone Windows Exe or .NET component that allows you to package content from a URL as a self-contained, local HTML file or package of files that can be saved and viewed offline.
 
 The packager can create:
 
@@ -10,7 +10,7 @@ The packager can create:
 * **An HTML file with external, local assets**
 * **A Zip package of the latter file and folder assets**
 
-This library is provided as a **.NET Library**, a small Windows **.NET 4.5 Cosole executable** and as a cross-platform  **.NET SDK Tool**:
+This library is provided as a **.NET Library**, a small Windows **.NET 4.5 Cosole executable** and a cross-platform  **.NET SDK Tool**:
 
 * [Chocolatey](https://chocolatey.org/packages/HtmlPackager) 
 * [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) 

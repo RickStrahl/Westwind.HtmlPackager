@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{719FA7E6-B8BD-4EA4-8B7E-D91A551D4B5A}"
 	ProjectSection(SolutionItems) = preProject
 		Install\build.ps1 = Install\build.ps1
+		Changelog.md = Changelog.md
 		README.md = README.md
 	EndProjectSection
 EndProject

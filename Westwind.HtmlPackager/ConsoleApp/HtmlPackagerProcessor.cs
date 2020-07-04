@@ -33,6 +33,8 @@
 
 using System;
 using System.Reflection;
+using Westwind.HtmlPackager;
+using Westwind.HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.Utilities;
 
 namespace HtmlPackager.ConsoleApp
@@ -48,8 +50,13 @@ namespace HtmlPackager.ConsoleApp
 
         public bool Process()
         {
-            var packager = new Westwind.HtmlPackager.HtmlPackager();            
             var consoleColor = Console.ForegroundColor;
+
+            var packager = new Westwind.HtmlPackager.HtmlPackager();
+            if (Parser.Verbose)
+            {
+                packager.WriteMessage += WriteConsole;
+            }            
 
             if (string.IsNullOrEmpty(Parser.TargetFile))
             {
@@ -68,7 +75,7 @@ namespace HtmlPackager.ConsoleApp
 
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             var ver = version.Major + "." + version.Minor + (version.Build > 0 ? "." + version.Build : string.Empty);
-            Console.WriteLine($"West Wind HTML Packager v{ver}");
+            ConsoleHelper.WriteWrappedHeader($"West Wind HTML Packager v{ver}");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Processing {Parser.SourceUrl}...");
@@ -133,6 +140,26 @@ namespace HtmlPackager.ConsoleApp
                 Utils.GoUrl(Parser.TargetFile);
 
             return true;
+        }
+
+        private static void WriteConsole(string msg, MessageModes mode)
+        {
+            var consoleColor = Console.ForegroundColor;
+
+            if (mode == Westwind.HtmlPackager.MessageModes.Error)
+                Console.ForegroundColor = ConsoleColor.Red;
+            else if (mode == Westwind.HtmlPackager.MessageModes.Warning)
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            else if (mode == Westwind.HtmlPackager.MessageModes.Information)
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            else if (mode == Westwind.HtmlPackager.MessageModes.Information2)
+                Console.ForegroundColor = ConsoleColor.Green;
+            else
+                Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine(msg);
+
+            Console.ForegroundColor = consoleColor;
         }
 
         /// <summary>

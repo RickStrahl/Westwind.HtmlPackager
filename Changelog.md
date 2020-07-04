@@ -1,5 +1,17 @@
 # Westwind.HtmlPackager
 
+### 0.1.6.5
+*November 6th, 2018*
+
+* **Add .NET SDK Global Tool and Cross Platform Support**  
+You can now install `dotnet install -g dotnet-htmlpackager` and then run `htmlpackager` globally on all supported .NET platforms. 
+
+* **Fix up link Paths**  
+Fix up link paths so that the relative paths for links in the document turned into absolute paths.
+
+* **Add Verbose Mode**  
+Verbose mode now shows links as they are processed and written out to disk for a more interactive display of progress.
+
 ### 0.1.4
 *November 1st, 2018*
 

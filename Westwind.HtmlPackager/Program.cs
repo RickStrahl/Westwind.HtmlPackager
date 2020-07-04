@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using HtmlPackager.ConsoleApp;
+using Westwind.HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.Utilities;
 
 namespace HtmlPackagerCore
@@ -15,11 +16,10 @@ namespace HtmlPackagerCore
                 var ver = version.Major + "." + version.Minor + (version.Build > 0 ? "." + version.Build : string.Empty);
                 string options =
                     $@"
-Html Packager v{version}
 
 Syntax:
 -------
-HtmlPackager <sourceUrl> -o <outputFile> -x -d
+htmlpackager <sourceUrl> -o <outputFile> -x -d
 
 Commands:
 ---------
@@ -33,15 +33,16 @@ sourceUrl           Source Url or local file to an HTML document
 -x                  Create external dependencies in folder of HTML document
 -z                  Create zip file with all dependencies included in zip
 -d                  Display generated HTML page or Zip file
+-v                  Verbose messages
 
 Examples:
 ---------
-HtmlPackager  https://github.com -o c:\temp\github_home.html
-HtmlPackager  c:\documents\somePage.html -o c:\temp\app_saved.html -x -d
-HtmlPackager  %userprofile%\Documents\myapp\somePage.html -o %TEMP%\app_saved.html
-HtmlPackager  https://github.com -o c:\temp\github-home.zip -z -d
+htmlpackager  https://github.com -o /temp.github_home.html
+htmlpackager  /documents/somePage.html -o /temp/app_saved.html -x -d
+htmlpackager  %userprofile%/Documents/myapp/somePage.html -o %TEMP%/app_saved.html
+htmlpackager  https://github.com -o /temp/github-home.zip -z -d
 ";
-
+                ConsoleHelper.WriteWrappedHeader($"Html Packager v{ver}");
                 Console.WriteLine(options);
             }
             else
