@@ -73,7 +73,7 @@ namespace HtmlPackager.ConsoleApp
                 return true;
             }
 
-            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var version = Assembly.GetEntryAssembly().GetName().Version;
             var ver = version.Major + "." + version.Minor + (version.Build > 0 ? "." + version.Build : string.Empty);
             ConsoleHelper.WriteWrappedHeader($"West Wind HTML Packager v{ver}");
 
