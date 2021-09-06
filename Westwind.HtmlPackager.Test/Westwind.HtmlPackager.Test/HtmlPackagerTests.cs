@@ -23,6 +23,10 @@ namespace Westwind.HtmlPackager.Test
                         
         }
 
+
+        /// <summary>
+        /// Uses Markdown Monster Preview temp file as a local file for testing.
+        /// </summary>
         [TestMethod]
         public void PackageFromFileTest()
         {

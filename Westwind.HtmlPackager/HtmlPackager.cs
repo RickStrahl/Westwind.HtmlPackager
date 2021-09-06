@@ -141,7 +141,7 @@ namespace Westwind.HtmlPackager
                 if (docBase != null)
                 {
                     basePath = docBase.Attributes["href"]?.Value;
-                    BaseUri = new Uri(baseUri: new Uri(urlOrFile),relativeUri: basePath,dontEscape: true);
+                    BaseUri = new Uri(baseUri: new Uri(urlOrFile),relativeUri: basePath);
                 }
                 docBase?.Remove();
 

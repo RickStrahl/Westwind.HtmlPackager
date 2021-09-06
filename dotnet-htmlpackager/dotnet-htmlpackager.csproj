@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>0.1.7.1</Version>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.1.8</Version>
+    <TargetFramework>net50</TargetFramework>
 
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
@@ -19,7 +19,7 @@ The packager can create:
       * An HTML file with all resources copied local into the same folder as the document
       * A zip file of the latter output
 
-This package is for the .NET SDK tooling, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a Nuget .NET Standard Library package (westwind.htmlpackager).
+This package is for the .NET SDK tooling, there are also packages for Chocolatey (HtmlPackager) as a standalone Console Windows exe, and a Nuget .NET Standard Library package (westwind.htmlpackager) for the underlying API.
     </Description>
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
