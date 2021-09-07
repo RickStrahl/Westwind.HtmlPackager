@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +16,19 @@ namespace HtmlPackager
     {
         static void Main(string[] args)
         {
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 |
+            //                                       SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+
             if (args == null || args.Length == 0 || args[0] == "HELP" || args[0] == "/?")
             {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                var ver = version.Major + "." + version.Minor + (version.Build > 0 ? "." + version.Build : string.Empty);
+                var ver = version.Major + "." + version.Minor +
+                          (version.Build > 0 ? "." + version.Build : string.Empty);
                 string options =
                     $@"
 Syntax:
 -------
-htmlpackager <sourceUrl> -o <outputFile> -x -d
+htmlpackager <sourceUrl> -o <outputFile> [-x|-z] -d -v
 
 Commands:
 ---------
@@ -41,7 +46,7 @@ sourceUrl           Source Url or local file to an HTML document
 
 Examples:
 ---------
-htmlpackager  https://github.com -o /temp.github_home.html
+htmlpackager  https://github.com -o /temp/github_home.html
 htmlpackager  /documents/somePage.html -o /temp/app_saved.html -x -d
 htmlpackager  %userprofile%/Documents/myapp/somePage.html -o %TEMP%/app_saved.html
 htmlpackager  https://github.com -o /temp/github-home.zip -z -d
@@ -54,9 +59,8 @@ htmlpackager  https://github.com -o /temp/github-home.zip -z -d
                 var cmdLine = new HtmlPackagerCommandLineParser();
                 cmdLine.Parse();
 
-                var del = new HtmlPackagerProcessor(cmdLine);
-                del.Process();
-
+                var processor = new HtmlPackagerProcessor(cmdLine);
+                processor.Process();
 
                 if (cmdLine.DisplayHtml && !string.IsNullOrEmpty(cmdLine.TargetFile))
                     Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
@@ -69,6 +73,6 @@ htmlpackager  https://github.com -o /temp/github-home.zip -z -d
 #endif
 
         }
-    }
 
+    }
 }

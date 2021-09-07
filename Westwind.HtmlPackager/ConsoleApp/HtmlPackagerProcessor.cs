@@ -103,8 +103,7 @@ namespace HtmlPackager.ConsoleApp
 
             if (Parser.ExternalDependencies)
             {
-                if (!packager.PackageHtmlToFolder(Parser.SourceUrl, Parser.TargetFile, null,
-                    Parser.ExternalDependencies))
+                if (!packager.PackageHtmlToFolder(Parser.SourceUrl, Parser.TargetFile, null, false))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error: Failed to create HTML output.");

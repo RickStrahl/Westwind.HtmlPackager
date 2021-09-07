@@ -1,5 +1,16 @@
 # Westwind.HtmlPackager
 
+### 0.1.9
+* September 6th, 2020
+
+* **Add support for .NET 5.0**  
+Fix up project to build for .NET 5.0. Targets are now .NET 4.5+ and .NET 5.0 and later.
+
+* **Fix local file baseUrl fix ups**  
+Fix errors that would occur if documents don't have baseUrl values embedded in the header. Added additional logic to deduce base Url from `base` or document path (local files specifically).
+
+
+
 ### 0.1.6.5
 *November 6th, 2018*
 

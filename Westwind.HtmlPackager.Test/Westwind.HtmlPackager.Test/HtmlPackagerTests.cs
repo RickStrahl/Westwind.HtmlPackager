@@ -20,9 +20,10 @@ namespace Westwind.HtmlPackager.Test
             // specify a test file here - I'm using output from Markdown Monster so i can
             // easily open/generate different files to test output against
             InputFile = Path.Combine(Path.GetTempPath(), "_MarkdownMonster_Preview.html");
-                        
-        }
 
+            //InputFile = @"C:\projects\WebSurge2\WebSurge\Html\TestResult-Generated.html";
+        }
+        
 
         /// <summary>
         /// Uses Markdown Monster Preview temp file as a local file for testing.
@@ -50,7 +51,7 @@ namespace Westwind.HtmlPackager.Test
         public void PackageFromWebTest()
         {
             var packager = new HtmlPackager();
-            string packaged = packager.PackageHtml("https://weblog.west-wind.com");
+            string packaged = packager.PackageHtml("https://weblog.west-wind.com/");
 
             string outputFile = InputFile.Replace(".html", "_PACKAGED.html");
             File.WriteAllText(outputFile, packaged);

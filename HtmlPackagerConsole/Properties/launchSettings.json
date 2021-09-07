@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HtmlPackagerConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "https://github.com -o /temp/websurge_home.html"
+    }
+  }
+}
