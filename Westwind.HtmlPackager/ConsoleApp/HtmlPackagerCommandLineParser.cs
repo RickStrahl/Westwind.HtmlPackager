@@ -22,7 +22,7 @@ namespace HtmlPackager.ConsoleApp
         
 
         /// <summary>
-        /// If true causes any document depedendencies to be written
+        /// If true causes any document dependencies to be written
         /// into the same folder as the TargetFile. Ignored
         /// if TargetFile is missing
         /// </summary>
