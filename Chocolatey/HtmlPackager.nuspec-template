@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>HtmlPackager</id>
@@ -26,7 +26,7 @@ This package contains a Windows Console application EXE, but there's also a cros
 		<iconUrl>https://raw.githubusercontent.com/RickStrahl/Westwind.HtmlPackager/master/HtmlPackagerIcon.png</iconUrl>
         <summary>Small utility used to package HTML content into a self contained HTML document both as a single file, or a folder with all dependencies copied to local.</summary>
         <releaseNotes></releaseNotes>
-        <copyright>West Wind Technologies, 2018</copyright>
+        <copyright>West Wind Technologies, 2018-2021</copyright>
         <tags>html packing console</tags>
     </metadata>
     <files>
