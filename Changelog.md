@@ -1,5 +1,14 @@
 # Westwind.HtmlPackager
 
+### 0.2
+
+* **Switch to .NET 6.0**  
+dotnet tool is now running as .NET 6.0 application. Standalone exe console app still runs as 
+
+* **Fix Embbeded Local Files with UrlEncoding** 
+Fix issue with local files that have UrlEncoding in their file name. Decode and also use cleaner file parsing APIs for local file embedding.
+
+
 ### 0.1.9
 * September 6th, 2020
 

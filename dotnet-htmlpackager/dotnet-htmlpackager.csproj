@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>0.1.9</Version>
-    <TargetFramework>net50</TargetFramework>
+    <Version>0.2</Version>
+    <TargetFramework>net60</TargetFramework>
 
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
