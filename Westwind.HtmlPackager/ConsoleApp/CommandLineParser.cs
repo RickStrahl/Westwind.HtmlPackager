@@ -79,6 +79,9 @@ namespace HtmlPackager.ConsoleApp
         /// <returns>Match or non-matching value</returns>
         protected string ParseStringParameterSwitch(string parm, string nonMatchingValue = null)
         {
+            if (string.IsNullOrEmpty(parm)) return nonMatchingValue;
+
+            parm = " " + parm;
             int at = CommandLine.IndexOf(parm, 0, StringComparison.OrdinalIgnoreCase);
 
             if (at > -1)
@@ -127,6 +130,9 @@ namespace HtmlPackager.ConsoleApp
 
         protected bool ParseParameterSwitch(string parm)
         {
+            if (string.IsNullOrEmpty(parm)) return false;
+
+            parm = " " + parm;
             int at = CommandLine.IndexOf(parm, 0, StringComparison.OrdinalIgnoreCase);
 
             if (at > -1)
