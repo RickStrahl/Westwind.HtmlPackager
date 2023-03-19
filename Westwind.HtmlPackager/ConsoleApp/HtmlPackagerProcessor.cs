@@ -33,6 +33,7 @@
 
 using System;
 using System.Reflection;
+using HtmlPackagerCore;
 using Westwind.HtmlPackager;
 using Westwind.HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.Utilities;
@@ -96,9 +97,7 @@ namespace HtmlPackager.ConsoleApp
                 Console.WriteLine($"Done. Created {Parser.TargetFile} Zip file output.");
                 Console.ForegroundColor = consoleColor;
 
-                if (Parser.DisplayHtml)                
-                    Utils.GoUrl(Parser.TargetFile);                
-                return true;
+        
             }
 
             if (Parser.ExternalDependencies)
@@ -116,10 +115,7 @@ namespace HtmlPackager.ConsoleApp
                 Console.WriteLine($"Done. Created {Parser.TargetFile} plus dependencies.");
                 Console.ForegroundColor = consoleColor;
 
-                if (Parser.DisplayHtml)
-                    Utils.GoUrl(Parser.TargetFile);
-
-                return true;
+          
             }
 
 
@@ -136,8 +132,18 @@ namespace HtmlPackager.ConsoleApp
             Console.ForegroundColor = consoleColor;
 
             if (Parser.DisplayHtml)
-                Utils.GoUrl(Parser.TargetFile);
-
+            {
+                try
+                {
+                    Utils.GoUrl(Parser.TargetFile);
+                }
+                catch(Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Can't open " + Parser.TargetFile + " for display: " + ex.Message);
+                }
+            }
+            
             return true;
         }
 

@@ -373,9 +373,17 @@ namespace Westwind.HtmlPackager
 
                     if (url.StartsWith("http") && url.Contains("://"))
                     {
+                        try{ 
                         using (var http = new WebClient())
                         {
                             cssText = http.DownloadString(url);
+                        }
+                        }
+                        catch (Exception ex)
+                        {
+                            OnMessage(" ==> Error: retrieving css from " + url + "\n" +
+                                      "            " + ex.Message, MessageModes.Error);
+                            continue;
                         }
                     }
                     else
@@ -433,10 +441,19 @@ namespace Westwind.HtmlPackager
                     origUri = new Uri(url);
                     OnMessage(" ==> loading script: " + origUri.AbsolutePath);
 
+                    try
+                    {
                         using (var http = new WebClient())
                         {
                             scriptData = http.DownloadData(url);
                         }
+                    }
+                    catch(Exception ex)
+                    {
+                        OnMessage(" ==> Error: retrieving script from " + url + "\n" +
+                                  "            " + ex.Message, MessageModes.Error );
+                        continue;
+                    }
                 }
                 else if (url.StartsWith("file:///"))
                 {
@@ -497,6 +514,22 @@ namespace Westwind.HtmlPackager
             if (images == null || images.Count < 1)
                 return;
 
+            // special case for favicons
+            var favIconNodes = doc.DocumentNode.SelectNodes("//link");
+            if (favIconNodes != null)
+            {
+                foreach (var favIconNode in favIconNodes)
+                {
+                    var url = favIconNode.Attributes["href"]?.Value;
+                    var rel = favIconNode.Attributes["rel"]?.Value;
+                    if (url != null && rel.Contains("icon"))
+                    {
+                        var node = HtmlNode.CreateNode($"<img src='{url}' />");
+                        images.Add(node);
+                    }
+                }
+            }
+
             foreach (var image in images)
             {
                 var url = image.Attributes["src"]?.Value;
@@ -512,10 +545,20 @@ namespace Westwind.HtmlPackager
                     origUri = new Uri(url);
 
                     OnMessage(" ==> loading image: " + origUri.AbsolutePath);
-                    using (var http = new WebClient())
+
+                    try
                     {
-                        imageData = http.DownloadData(url);
-                        contentType = http.ResponseHeaders[HttpResponseHeader.ContentType];
+                        using (var http = new WebClient())
+                        {
+                            imageData = http.DownloadData(url);
+                            contentType = http.ResponseHeaders[HttpResponseHeader.ContentType];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        OnMessage(" ==> Error: retrieving image from " + url + "\n" +
+                                  "            " + ex.Message, MessageModes.Error);
+                        continue;
                     }
                 }
                 else if(url.StartsWith("file:///"))
@@ -654,7 +697,8 @@ namespace Westwind.HtmlPackager
                 var url = Utils.ExtractString(matched,"(", ")")?.Trim(new char[] {'\'', '\"'}).Replace("&amp;","").Replace("quot;","");
                 if (url.Contains("?"))
                     url = Utils.ExtractString(url, "", "?");
-                
+
+                // skip rarely used font files for size
                 if (url.EndsWith(".eot") || url.EndsWith(".ttf"))
                     continue;
 

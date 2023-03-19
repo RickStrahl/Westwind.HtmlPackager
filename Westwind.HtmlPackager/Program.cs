@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using HtmlPackager.ConsoleApp;
 using Westwind.HtmlPackager.ConsoleApp;
@@ -55,7 +56,16 @@ htmlpackager  https://github.com -o /temp/github-home.zip -z -d
 
 
                 if (cmdLine.DisplayHtml && !string.IsNullOrEmpty(cmdLine.TargetFile))
-                    Utils.GoUrl(cmdLine.TargetFile);
+                {
+                    try
+                    {
+                        Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
+                    }
+                    catch (Exception ex)
+                    {
+                        ConsoleHelper.WriteError("Error: Can't open " + cmdLine.TargetFile + ": " + ex.Message);
+                    }
+                }
             }
 
 #if DEBUG

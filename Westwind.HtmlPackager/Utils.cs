@@ -184,14 +184,15 @@ namespace Westwind.HtmlPackager.Utilities
         /// </summary>
         /// <param name="url">Any URL Moniker that the Windows Shell understands (URL, Word Docs, PDF, Email links etc.)</param>
         /// <returns></returns>
-        public static int GoUrl(string url)
+        public static int GoUrl(string url, string workingDirectory = null)
         {
-            string TPath = Path.GetTempPath();
-
+            if (string.IsNullOrEmpty(workingDirectory))
+                workingDirectory = Environment.CurrentDirectory;
+            
             ProcessStartInfo info = new ProcessStartInfo();
             info.UseShellExecute = true;
             info.Verb = "Open";
-            info.WorkingDirectory = TPath;
+            info.WorkingDirectory = workingDirectory;
             info.FileName = url;
 
             Process process = new Process();
