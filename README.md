@@ -21,7 +21,7 @@ The packager works with:
 * Web Urls
 * Local HTML Files
 
-There are two packaging modes:
+There are three packaging modes:
 
 * **Package to a single file**  
 All related resources are downloaded and embedded into the HTML content. CSS is embedded as text while images, scripts and url resources are embedded as base64 data links. The result is one very large HTML document that contains all resources embedded. 
@@ -29,8 +29,11 @@ All related resources are downloaded and embedded into the HTML content. CSS is 
 * **HTML file plus loose Resource Files**  
 Produces an HTML file plus all CSS, Script, images, fonts as loose files stored in the same folder as the HTML. An option also allows packaging the folder as a Zip file.
 
+* **Zip File with loose Resource Files**  
+Similar to loose resource files, but all files are packaged into a single self-contained zip file to shrink the size of the output.
+
 ## .NET Library
-The .NET library allows embedding of the packaging functionality into your own applicaitons. It is very small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. The library has an external dependency on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
+The .NET library allows embedding of the packaging functionality into your own applications. It is very small and self-contained and can be easily added to another project with two source files, or you can use [NuGet](https://www.nuget.org/packages/Westwind.HtmlPackager) to include the binaries. The library has an external dependency on [HtmlAgilityPack](http://html-agility-pack.net) for HTML parsing.
 
 Supported .NET Targets:
 
