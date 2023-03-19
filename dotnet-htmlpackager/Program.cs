@@ -55,7 +55,16 @@ htmlpackager  https://github.com -o /temp/github-home.zip -z -d
 
 
                 if (cmdLine.DisplayHtml && !string.IsNullOrEmpty(cmdLine.TargetFile))
-                    Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
+                {
+                    try
+                    {
+                        Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
+                    }
+                    catch (Exception ex)
+                    {
+                        ConsoleHelper.WriteError("Error: Can't open " + cmdLine.TargetFile + ": " + ex.Message);
+                    }
+                }
             }
 
         }

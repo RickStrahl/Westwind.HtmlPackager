@@ -2,7 +2,7 @@
   "profiles": {
     "HtmlPackagerConsole": {
       "commandName": "Project",
-      "commandLineArgs": "https://github.com -o /temp/websurge_home.html"
+      "commandLineArgs": "https://reclaimthenet.org/unlike-other-states-florida-says-no-to-vaccine-passports/ -o d:/temp/websurge_home.html -d"
     }
   }
 }

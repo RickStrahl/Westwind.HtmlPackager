@@ -47,6 +47,31 @@ namespace Westwind.HtmlPackager.Test
 
         }
 
+        /// <summary>
+        /// Uses Markdown Monster Preview temp file as a local file for testing.
+        /// </summary>
+        [TestMethod]
+        public void PackageFromWebWithBrokenLinksText()
+        {
+            var packager = new HtmlPackager();
+            string packaged = packager.PackageHtml("https://reclaimthenet.org/unlike-other-states-florida-says-no-to-vaccine-passports/");
+
+            Console.WriteLine(packager.ErrorMessage);;
+
+            string outputFile = InputFile.Replace(".html", "_PACKAGED.html");
+            File.WriteAllText(outputFile, packaged);
+
+            Console.WriteLine(packaged);
+
+            Assert.IsNotNull(packaged);
+
+#if !NETCORE
+            ShellUtils.GoUrl(outputFile);
+#endif
+
+        }
+
+
         [TestMethod]
         public void PackageFromWebTest()
         {

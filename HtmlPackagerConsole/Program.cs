@@ -7,10 +7,14 @@ using Westwind.HtmlPackager.Utilities;
 
 namespace HtmlPackager
 {
-    class Program
+    public class Program
     {
+        public static string StartupPath; 
+
         static void Main(string[] args)
         {
+            StartupPath = Environment.CurrentDirectory;
+
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 |
             //                                       SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
 
@@ -58,7 +62,16 @@ htmlpackager  https://github.com -o /temp/github-home.zip -z -d
                 processor.Process();
 
                 if (cmdLine.DisplayHtml && !string.IsNullOrEmpty(cmdLine.TargetFile))
-                    Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
+                {
+                    try
+                    {
+                        Utils.GoUrl(Path.GetFullPath(cmdLine.TargetFile));
+                    }
+                    catch(Exception ex)
+                    {
+                        ConsoleHelper.WriteError("Error: Can't open " + cmdLine.TargetFile + ": " + ex.Message);
+                    }
+                }
             }
 
 #if DEBUG
