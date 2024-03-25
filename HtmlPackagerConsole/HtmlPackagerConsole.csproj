@@ -2,9 +2,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>HtmlPackager</AssemblyName>
-    <Version>0.2.1</Version>
-    <TargetFramework>net472</TargetFramework>
-    
+    <Version>0.2.4</Version>
+    <TargetFramework>net472</TargetFramework>    
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
     <Copyright>© Rick Strahl - West Wind Technologies, 2018-2023</Copyright>

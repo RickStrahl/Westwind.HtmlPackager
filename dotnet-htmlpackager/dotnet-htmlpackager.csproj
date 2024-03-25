@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>0.2.1</Version>
-    <TargetFramework>net60</TargetFramework>
-
+    <Version>0.2.4</Version>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
     <Product>HtmlPackager</Product>

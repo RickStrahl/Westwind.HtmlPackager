@@ -171,7 +171,7 @@ namespace Westwind.HtmlPackager
                     {
                         var tBasePath = url.Replace("file:///", "");
                         if (!string.IsNullOrEmpty(tBasePath) && tBasePath != "\\" && tBasePath != "/")
-                            basePath = tBasePath;
+                            basePath =  System.Net.WebUtility.UrlDecode(tBasePath);
                     }
                 }
                 docBase?.Remove();
