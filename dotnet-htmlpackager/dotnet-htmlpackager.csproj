@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>0.2.4</Version>
+    <Version>0.2.5</Version>
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
     <Product>HtmlPackager</Product>
-    <Copyright>© Rick Strahl - West Wind Technologies, 2018-2023</Copyright>
+    <Copyright>© Rick Strahl - West Wind Technologies, 2018-2025</Copyright>
 
     <Description>HtmlPackager is a small console .NET SDK tools used to package HTML content into a self contained HTML document either as a single file or console output stream, a folder with all dependencies copied to local or a zip file. It provides a automated way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
 

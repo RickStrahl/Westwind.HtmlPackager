@@ -2,11 +2,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>HtmlPackager</AssemblyName>
-    <Version>0.2.4</Version>
+    <Version>0.2.5</Version>
     <TargetFramework>net472</TargetFramework>    
     <Authors>Rick Strahl</Authors>
     <Company>West Wind Technolologies</Company>
-    <Copyright>© Rick Strahl - West Wind Technologies, 2018-2023</Copyright>
+    <Copyright>© Rick Strahl - West Wind Technologies, 2018-2025</Copyright>
     <Product>West Wind Html Packager</Product>
     <Description>HtmlPackager is a small console .NET SDK tools used to package HTML content into a self contained HTML document either as a single file or console output stream, a folder with all dependencies copied to local or a zip file. It provides a automated way to perform a similar task to what Browser **Save As...** does to capture page output to disk.
 
@@ -18,7 +18,7 @@
       * A zip file of the latter output
 
       This package is for the .NET SDK tooling, there are also packages for Chocolatey (HtmlPackager) as a standalone Windows exe, and a Nuget .NET Standard Library package (westwind.htmlpackager).</Description>
-    <Copyright>Copyright ©  West Wind Technologies, 2018-2021</Copyright>
+    <Copyright>Copyright ©  West Wind Technologies, 2018-2025</Copyright>
 
     <PackageProjectUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RickStrahl/Westwind.HtmlPackager</RepositoryUrl>

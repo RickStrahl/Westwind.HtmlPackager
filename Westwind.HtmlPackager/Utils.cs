@@ -145,9 +145,7 @@ namespace Westwind.HtmlPackager.Utilities
             if (string.IsNullOrEmpty(file))
                 return file;
 
-
-
-            string ext = System.IO.Path.GetExtension(file).ToLower();
+            string ext = Path.GetExtension(file).ToLower();
             if (ext == ".jpg" || ext == ".jpeg")
                 return "image/jpeg";
             if (ext == ".png")
@@ -158,22 +156,20 @@ namespace Westwind.HtmlPackager.Utilities
                 return "image/bmp";
             if (ext == ".tif" || ext == ".tiff")
                 return "image/tiff";
+            if (ext == ".svg")
+                return "image/svg+xml";
 
             // fonts
             if (ext == ".woff")
                 return "application/font-woff";
-            if (ext == ".svg")
-                return "image/svg+xml";
-
-            // ignored fonts
             if (ext == ".woff2")
-                return "font/woff2";
-            //if (ext == ".otf")
-            //    return "application/x-font-opentype";
-            //if (ext == ".ttf")
-            //    return "application/x-font-ttf";
-            //if (ext == ".eot")
-            //    return "application/vnd.ms-fontobject";
+                return "application/font-woff2";
+            if (ext == ".ttf")
+                return "application/x-font-ttf";            
+            if (ext == ".otf")
+                return "application/x-font-opentype";
+            if (ext == ".eot")
+                return "application/vnd.ms-fontobject";
 
             return "application/image";
         }

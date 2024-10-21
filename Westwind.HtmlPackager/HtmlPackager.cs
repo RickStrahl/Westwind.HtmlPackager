@@ -33,6 +33,7 @@
 
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -703,12 +704,19 @@ namespace Westwind.HtmlPackager
                     continue;
 
                 OnMessage(" ==> loading embedded: " + url);
-                
+                Debug.WriteLine("Embeded Url: " + url);
                 if (url.StartsWith("http"))
                 {
                     using (var http = new WebClient())
                     {
-                        linkData = http.DownloadData(url);
+                        try
+                        {
+                            linkData = http.DownloadData(url);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
                         contentType = http.ResponseHeaders[HttpResponseHeader.ContentType];
                     }
                 }
