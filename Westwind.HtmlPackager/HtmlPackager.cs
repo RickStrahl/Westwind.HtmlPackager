@@ -344,7 +344,7 @@ namespace Westwind.HtmlPackager
                 if (url == null)
                     continue;
 
-                string cssText;
+                string cssText = string.Empty;
 
                 var originalUrl = url;
                 Uri origUri = null;
@@ -363,7 +363,13 @@ namespace Westwind.HtmlPackager
                 {
                     origUri = new Uri(url);
                     OnMessage(" ==> loading css: " + origUri.AbsolutePath);
-                    cssText = File.ReadAllText(WebUtility.UrlDecode(origUri.LocalPath));                   
+                    var file = WebUtility.UrlDecode(origUri.LocalPath);
+                    try
+                    {
+                        cssText = File.ReadAllText(WebUtility.UrlDecode(origUri.LocalPath));
+                    }
+                    catch { }
+                    
                 }
                 else // Relative Path
                 {
@@ -389,7 +395,11 @@ namespace Westwind.HtmlPackager
                     }
                     else
                     {
-                        cssText = File.ReadAllText(WebUtility.UrlDecode(origUri.LocalPath));
+                        try
+                        {
+                            cssText = File.ReadAllText(WebUtility.UrlDecode(origUri.LocalPath));
+                        }
+                        catch { }
                     }
                 }
 
@@ -435,8 +445,8 @@ namespace Westwind.HtmlPackager
                     continue;
 
                 Uri origUri = null;
-                
-                byte[] scriptData;
+
+                byte[] scriptData = null;
                 if (url.StartsWith("http"))
                 {
                     origUri = new Uri(url);
@@ -462,7 +472,11 @@ namespace Westwind.HtmlPackager
                     OnMessage(" ==> loading script: " + origUri.AbsolutePath);
 
                     url = WebUtility.UrlDecode(origUri.LocalPath);
-                    scriptData = File.ReadAllBytes(url);                    ;
+                    try
+                    {
+                        scriptData = File.ReadAllBytes(url); ;                        
+                    }
+                    catch { }
                 }
                 else // Relative Path
                 {
@@ -481,7 +495,14 @@ namespace Westwind.HtmlPackager
                             }
                         }
                         else
-                            scriptData = File.ReadAllBytes(WebUtility.UrlDecode(origUri.LocalPath));
+                        {
+
+                            try
+                            {
+                                scriptData = File.ReadAllBytes(WebUtility.UrlDecode(origUri.LocalPath));
+                            }
+                            catch { }
+                        }
                     }
                     catch
                     {
@@ -536,8 +557,8 @@ namespace Westwind.HtmlPackager
                 var url = image.Attributes["src"]?.Value;
                 if (url == null)
                     continue;
-                
-                byte[] imageData;
+
+                byte[] imageData = null;
                 string contentType;
                 Uri origUri = null;
 
@@ -580,13 +601,18 @@ namespace Westwind.HtmlPackager
                 }
                 else // Relative Path
                 {
+                    if (url.StartsWith("./") || url.StartsWith(".\\"))
+                    {
+                        int x = 0;
+                    }
+
                     try
                     {
                         origUri = new Uri(BaseUri, url);
                         url = origUri.AbsoluteUri;
                         OnMessage(" ==> loading image: " + url);
 
-                        if (url.StartsWith("http://") || url.StartsWith("https://") )
+                        if (url.StartsWith("http://") || url.StartsWith("https://"))
                         {
                             using (var http = new WebClient())
                             {
@@ -594,7 +620,13 @@ namespace Westwind.HtmlPackager
                             }
                         }
                         else
-                            imageData = File.ReadAllBytes(WebUtility.UrlDecode(origUri.LocalPath)); 
+                        {
+                            try
+                            {
+                                imageData = File.ReadAllBytes(WebUtility.UrlDecode(origUri.LocalPath));
+                            }
+                            catch { }
+                        }
 
                         contentType = Utils.GetImageMediaTypeFromFilename(url);
                     }
