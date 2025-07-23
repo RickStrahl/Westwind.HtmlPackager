@@ -600,12 +600,7 @@ namespace Westwind.HtmlPackager
                     }
                 }
                 else // Relative Path
-                {
-                    if (url.StartsWith("./") || url.StartsWith(".\\"))
-                    {
-                        int x = 0;
-                    }
-
+                {                    
                     try
                     {
                         origUri = new Uri(BaseUri, url);
